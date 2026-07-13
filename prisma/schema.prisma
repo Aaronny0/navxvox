@@ -1,0 +1,262 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  firstName     String
+  lastName      String
+  companyName   String
+  phone         String?
+  address       String?
+  siret         String?
+  logoUrl       String?
+  passwordHash  String
+  emailVerified Boolean  @default(false)
+  role          String   @default("CLIENT") // CLIENT | EMPLOYEE | ADMIN | SUPER_ADMIN
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Notification preferences
+  notifEmail    Boolean @default(true)
+  notifInApp    Boolean @default(true)
+
+  // Relations
+  sessions       Session[]
+  verifications  EmailVerification[]
+  passwordResets PasswordReset[]
+  projects       Project[]
+  briefs         Brief[]
+  messages       ProjectMessage[]
+  notifications  Notification[]
+  invoices       Invoice[]
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model EmailVerification {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model PasswordReset {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Project {
+  id              String   @id @default(cuid())
+  clientId        String
+  name            String
+  serviceType     String
+  status          String   @default("pending") // pending | active | revision | delivered | archived
+  progress        Int      @default(0) // 0-100
+  assignedTo      String?
+  estimatedAt     DateTime?
+  deliveredAt     DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  client          User              @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  files           ProjectFile[]
+  messages        ProjectMessage[]
+  quotes          Quote[]
+  notifications   Notification[]
+}
+
+model ProjectFile {
+  id          String   @id @default(cuid())
+  projectId   String
+  uploadedBy  String   // "client" | "novavox"
+  fileName    String
+  fileUrl     String
+  fileSize    Int
+  mimeType    String
+  createdAt   DateTime @default(now())
+
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model ProjectMessage {
+  id          String   @id @default(cuid())
+  projectId   String
+  senderId    String
+  senderType  String   // "client" | "novavox"
+  content     String
+  attachments String   @default("[]") // JSON array of file URLs
+  readAt      DateTime?
+  createdAt   DateTime @default(now())
+
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  sender      User     @relation(fields: [senderId], references: [id])
+}
+
+model Quote {
+  id          String   @id @default(cuid())
+  projectId   String
+  number      String   @unique
+  amountHT    Float
+  tvaRate     Float    @default(20)
+  amountTTC   Float
+  status      String   @default("pending") // pending | accepted | refused
+  refusalNote String?
+  validUntil  DateTime
+  pdfUrl      String?
+  createdAt   DateTime @default(now())
+  respondedAt DateTime?
+
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  lines       QuoteLineItem[]
+}
+
+model Invoice {
+  id          String   @id @default(cuid())
+  clientId    String
+  number      String   @unique
+  amountHT    Float
+  tvaRate     Float    @default(20)
+  amountTTC   Float
+  status      String   @default("sent") // sent | viewed | paid
+  pdfUrl      String?
+  dueDate     DateTime?
+  paidAt      DateTime?
+  createdAt   DateTime @default(now())
+
+  client      User     @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  lines       InvoiceLineItem[]
+}
+
+model Brief {
+  id           String   @id @default(cuid())
+  clientId     String
+  serviceType  String
+  projectName  String?
+  budget       String?
+  deadline     String?
+  description  String
+  files        String   @default("[]") // JSON array of file URLs
+  status       String   @default("received") // received | processing | converted
+  createdAt    DateTime @default(now())
+
+  client       User     @relation(fields: [clientId], references: [id], onDelete: Cascade)
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  projectId String?
+  type      String   // message | status_change | new_file | quote | invoice
+  title     String
+  body      String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  project   Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+}
+
+model QuoteLineItem {
+  id          String   @id @default(cuid())
+  quoteId     String
+  description String
+  quantity    Int
+  unitPriceHT Float
+  tvaRate     Float    @default(20)
+
+  quote       Quote    @relation(fields: [quoteId], references: [id], onDelete: Cascade)
+}
+
+model InvoiceLineItem {
+  id          String   @id @default(cuid())
+  invoiceId   String
+  description String
+  quantity    Int
+  unitPriceHT Float
+  tvaRate     Float    @default(20)
+
+  invoice     Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+}
+
+model Service {
+  id            String   @id @default(cuid())
+  title         String
+  slug          String   @unique
+  icon          String?
+  shortDesc     String
+  longDesc      String
+  estimatedTime String?
+  priceRange    String?
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model PortfolioProject {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  category    String
+  description String
+  images      String   @default("[]") // JSON array
+  clientName  String?
+  date        DateTime?
+  isPublished Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model BlogPost {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  coverImage  String?
+  category    String
+  tags        String   @default("[]") // JSON array
+  content     String
+  status      String   @default("draft") // draft | published
+  publishedAt DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Settings {
+  id                 String   @id @default(cuid())
+  agencyName         String   @default("NOVAVOX")
+  agencyAddress      String?
+  agencySiret        String?
+  agencyEmail        String?
+  agencyPhone        String?
+  agencyLogo         String?
+  quotePrefix        String   @default("DEV-")
+  quoteNextNumber    Int      @default(1)
+  invoicePrefix      String   @default("FAC-")
+  invoiceNextNumber  Int      @default(1)
+  defaultTva         Float    @default(20)
+  emailNotifsEnabled Boolean  @default(true)
+  updatedAt          DateTime @updatedAt
+}

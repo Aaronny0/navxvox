@@ -1,65 +1,262 @@
-import Image from "next/image";
+import Link from "next/link";
+import { services, stats, testimonials } from "@/lib/data";
+import { getFeaturedProjects } from "@/lib/data";
+import TypewriterEffect from "./components/TypewriterEffect";
+import AnimatedCounter from "./components/AnimatedCounter";
+import ServiceCard from "./components/ServiceCard";
+import ProjectCard from "./components/ProjectCard";
+import SectionHeading from "./components/SectionHeading";
+import TestimonialSlider from "./components/TestimonialSlider";
+import ScrollReveal from "./components/ScrollReveal";
 
 export default function Home() {
+  const featuredProjects = getFeaturedProjects();
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <>
+      {/* ═══════════════ HERO ═══════════════ */}
+      <section
+        style={{
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          position: "relative",
+          overflow: "hidden",
+          padding: "8rem 0 4rem",
+        }}
+      >
+        {/* Orbs */}
+        <div className="nv-orb nv-orb-violet" style={{ width: "500px", height: "500px", top: "-10%", left: "-5%" }} />
+        <div className="nv-orb nv-orb-cyan" style={{ width: "400px", height: "400px", bottom: "0", right: "-5%" }} />
+        <div className="nv-orb nv-orb-pink" style={{ width: "300px", height: "300px", top: "40%", left: "50%" }} />
+
+        <div className="nv-container" style={{ position: "relative", zIndex: 1, textAlign: "center" }}>
+          <div style={{ animation: "fadeInUp 0.8s ease" }}>
+            <span className="nv-badge" style={{ marginBottom: "1.5rem" }}>
+              ✨ Agence Web Premium
+            </span>
+          </div>
+
+          <h1
+            style={{
+              animation: "fadeInUp 0.8s ease 0.1s both",
+              marginBottom: "1.5rem",
+              maxWidth: "900px",
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+            Nous créons des expériences web{" "}
+            <TypewriterEffect
+              words={["mémorables", "performantes", "sur mesure", "exceptionnelles"]}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          </h1>
+
+          <p
+            style={{
+              animation: "fadeInUp 0.8s ease 0.2s both",
+              fontSize: "clamp(1rem, 2vw, 1.2rem)",
+              color: "var(--nv-text-secondary)",
+              maxWidth: "600px",
+              margin: "0 auto 2.5rem",
+              lineHeight: 1.8,
+            }}
           >
-            Documentation
-          </a>
+            NOVAVOX conçoit des sites vitrines, applications web et e-commerces
+            qui propulsent votre business. Design premium, performances optimales.
+          </p>
+
+          <div
+            style={{
+              animation: "fadeInUp 0.8s ease 0.3s both",
+              display: "flex",
+              gap: "1rem",
+              justifyContent: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            <Link href="/contact" className="nv-btn nv-btn-primary">
+              Démarrer un projet →
+            </Link>
+            <Link href="/portfolio" className="nv-btn nv-btn-ghost">
+              Voir nos réalisations
+            </Link>
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* ═══════════════ STATS ═══════════════ */}
+      <section
+        style={{
+          borderTop: "1px solid var(--nv-border-light)",
+          borderBottom: "1px solid var(--nv-border-light)",
+          background: "var(--nv-bg-secondary)",
+          padding: "3rem 0",
+        }}
+      >
+        <div className="nv-container">
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
+              gap: "2rem",
+              textAlign: "center",
+            }}
+          >
+            {stats.map((stat, i) => (
+              <ScrollReveal key={stat.label} delay={i * 100}>
+                <div>
+                  <span style={{ fontSize: "1.5rem", display: "block", marginBottom: "0.5rem" }}>
+                    {stat.icon}
+                  </span>
+                  <div
+                    style={{
+                      fontFamily: "Outfit, sans-serif",
+                      fontSize: "clamp(2rem, 4vw, 3rem)",
+                      fontWeight: 800,
+                      background: "var(--nv-grad-text)",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      backgroundClip: "text",
+                    }}
+                  >
+                    <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                  </div>
+                  <p style={{ fontSize: "0.875rem", color: "var(--nv-text-muted)", margin: 0 }}>
+                    {stat.label}
+                  </p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════ SERVICES ═══════════════ */}
+      <section className="nv-section">
+        <div className="nv-container">
+          <ScrollReveal>
+            <SectionHeading
+              badge="Nos Services"
+              title="Des solutions digitales complètes"
+              subtitle="De l'idée à la réalisation, nous maîtrisons chaque étape de votre projet web."
+            />
+          </ScrollReveal>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
+              gap: "1.5rem",
+            }}
+          >
+            {services.map((service, i) => (
+              <ScrollReveal key={service.id} delay={i * 80}>
+                <ServiceCard service={service} index={i} />
+              </ScrollReveal>
+            ))}
+          </div>
+
+          <div style={{ textAlign: "center", marginTop: "3rem" }}>
+            <Link href="/services" className="nv-btn nv-btn-ghost">
+              Tous nos services →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════ PORTFOLIO ═══════════════ */}
+      <section
+        className="nv-section"
+        style={{ background: "var(--nv-bg-secondary)" }}
+      >
+        <div className="nv-container">
+          <ScrollReveal>
+            <SectionHeading
+              badge="Portfolio"
+              title="Nos dernières réalisations"
+              subtitle="Chaque projet est une histoire unique. Découvrez comment nous avons aidé nos clients à se démarquer."
+            />
+          </ScrollReveal>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))",
+              gap: "1.5rem",
+            }}
+          >
+            {featuredProjects.map((project, i) => (
+              <ScrollReveal key={project.id} delay={i * 100}>
+                <ProjectCard project={project} />
+              </ScrollReveal>
+            ))}
+          </div>
+
+          <div style={{ textAlign: "center", marginTop: "3rem" }}>
+            <Link href="/portfolio" className="nv-btn nv-btn-ghost">
+              Voir tout le portfolio →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════ TÉMOIGNAGES ═══════════════ */}
+      <section className="nv-section" style={{ position: "relative", overflow: "hidden" }}>
+        <div className="nv-orb nv-orb-violet" style={{ width: "400px", height: "400px", top: "10%", right: "-10%" }} />
+        <div className="nv-container" style={{ position: "relative", zIndex: 1 }}>
+          <ScrollReveal>
+            <SectionHeading
+              badge="Témoignages"
+              title="Ce que disent nos clients"
+              subtitle="La satisfaction client est notre priorité absolue."
+            />
+          </ScrollReveal>
+          <ScrollReveal>
+            <TestimonialSlider testimonials={testimonials} />
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ═══════════════ CTA FINAL ═══════════════ */}
+      <section
+        style={{
+          padding: "6rem 0",
+          background: "linear-gradient(135deg, rgba(139,92,246,0.12) 0%, rgba(34,211,238,0.06) 100%)",
+          borderTop: "1px solid var(--nv-border-light)",
+          textAlign: "center",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <div className="nv-orb nv-orb-violet" style={{ width: "300px", height: "300px", bottom: "-20%", left: "10%" }} />
+        <div className="nv-container" style={{ position: "relative", zIndex: 1 }}>
+          <ScrollReveal>
+            <h2
+              style={{
+                fontFamily: "Outfit, sans-serif",
+                marginBottom: "1rem",
+              }}
+            >
+              Prêt à démarrer votre projet ?
+            </h2>
+            <p
+              style={{
+                fontSize: "1.1rem",
+                color: "var(--nv-text-secondary)",
+                maxWidth: "500px",
+                margin: "0 auto 2rem",
+              }}
+            >
+              Premier échange gratuit et sans engagement. Parlons de votre vision.
+            </p>
+            <Link href="/contact" className="nv-btn nv-btn-primary" style={{ fontSize: "1rem", padding: "1rem 2.5rem" }}>
+              Contactez-nous ✨
+            </Link>
+          </ScrollReveal>
+        </div>
+      </section>
+    </>
   );
 }
