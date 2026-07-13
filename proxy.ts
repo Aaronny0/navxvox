@@ -11,7 +11,7 @@ const PUBLIC_CLIENT_PATHS = [
 
 const PUBLIC_ADMIN_PATHS = ["/admin/login"];
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Only handle /client/* and /admin/* routes
@@ -29,7 +29,7 @@ export async function middleware(request: NextRequest) {
   if (!token) {
     if (isClientRoute && isPublicClientPath) return NextResponse.next();
     if (isAdminRoute && isPublicAdminPath) return NextResponse.next();
-    
+
     if (isClientRoute) return NextResponse.redirect(new URL("/client/login", request.url));
     if (isAdminRoute) return NextResponse.redirect(new URL("/admin/login", request.url));
   }

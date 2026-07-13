@@ -3,6 +3,8 @@ import { db } from "@/lib/db";
 import { generateQuotePDF } from "@/lib/pdf";
 import { getSession } from "@/lib/auth";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getSession();
   if (!session) return new NextResponse("Unauthorized", { status: 401 });
