@@ -72,9 +72,9 @@ export default async function AdminDashboardPage() {
         {[
           { label: "Clients totaux", value: totalClients, icon: "👥", color: "var(--nv-accent-violet)" },
           { label: "Projets en cours", value: activeProjects, icon: "🚀", color: "var(--nv-accent-cyan)" },
-          { label: "Livrés ce mois", value: deliveredThisMonth, icon: "✅", color: "#10b981" },
-          { label: "Briefs en attente", value: pendingBriefs, icon: "📥", color: "#f59e0b" },
-          { label: "Devis en attente", value: pendingQuotes, icon: "📄", color: "#ef4444" },
+          { label: "Livrés ce mois", value: deliveredThisMonth, icon: "✅", color: "var(--nv-success)" },
+          { label: "Briefs en attente", value: pendingBriefs, icon: "📥", color: "var(--nv-warning)" },
+          { label: "Devis en attente", value: pendingQuotes, icon: "📄", color: "var(--nv-error)" },
         ].map((stat) => (
           <div key={stat.label} className="nv-card" style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
             <div style={{ fontSize: "2rem" }}>{stat.icon}</div>
@@ -90,20 +90,20 @@ export default async function AdminDashboardPage() {
         {/* Urgent Projects */}
         <div className="nv-card">
           <h2 style={{ fontSize: "1.25rem", marginBottom: "1.5rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-            <span style={{ color: "#ef4444" }}>⚠️</span> Projets urgents (&lt; 7 jours)
+            <span style={{ color: "var(--nv-error)" }}>⚠️</span> Projets urgents (&lt; 7 jours)
           </h2>
           {urgentProjects.length === 0 ? (
             <p style={{ color: "var(--nv-text-muted)" }}>Aucun projet urgent.</p>
           ) : (
             <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
               {urgentProjects.map((p) => (
-                <div key={p.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "1rem", background: "rgba(239, 68, 68, 0.05)", borderRadius: "0.5rem", borderLeft: "4px solid #ef4444" }}>
+                <div key={p.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "1rem", background: "rgba(198, 40, 40, 0.07)", borderRadius: "0.5rem", borderLeft: "4px solid var(--nv-error)" }}>
                   <div>
                     <h3 style={{ fontSize: "1rem", margin: "0 0 0.25rem" }}>{p.name}</h3>
                     <p style={{ fontSize: "0.85rem", color: "var(--nv-text-secondary)", margin: 0 }}>Client : {p.client.companyName}</p>
                   </div>
                   <div style={{ textAlign: "right" }}>
-                    <p style={{ margin: "0 0 0.25rem", fontWeight: 600, color: "#ef4444" }}>
+                    <p style={{ margin: "0 0 0.25rem", fontWeight: 600, color: "var(--nv-error)" }}>
                       {p.estimatedAt ? new Date(p.estimatedAt).toLocaleDateString("fr-FR") : "N/A"}
                     </p>
                     <Link href={`/admin/projects/${p.id}`} style={{ fontSize: "0.85rem", color: "var(--nv-accent-violet)", textDecoration: "none" }}>Voir</Link>

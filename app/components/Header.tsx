@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
   { href: "/", label: "Accueil" },
@@ -15,8 +16,8 @@ const navLinks = [
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeLink, setActiveLink] = useState("/");
-  const menuRef = useRef<HTMLDivElement>(null);
+  const activeLink = usePathname();
+  const menuRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,12 +25,6 @@ export default function Header() {
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setActiveLink(window.location.pathname);
-    }
   }, []);
 
   useEffect(() => {
@@ -66,11 +61,11 @@ export default function Header() {
         transition: "all var(--nv-transition)",
         padding: scrolled ? "0.75rem 0" : "1.25rem 0",
         background: scrolled
-          ? "rgba(5, 5, 8, 0.92)"
+          ? "rgba(10, 14, 26, 0.85)"
           : "transparent",
-        backdropFilter: scrolled ? "blur(20px)" : "none",
+        backdropFilter: scrolled ? "blur(12px)" : "none",
         borderBottom: scrolled
-          ? "1px solid rgba(139, 92, 246, 0.1)"
+          ? "1px solid rgba(26, 111, 212, 0.2)"
           : "1px solid transparent",
       }}
     >
@@ -160,7 +155,7 @@ export default function Header() {
                         : "var(--nv-text-secondary)",
                     background:
                       activeLink === link.href
-                        ? "rgba(139, 92, 246, 0.1)"
+                        ? "rgba(26, 111, 212, 0.14)"
                         : "transparent",
                     transition: "all var(--nv-transition)",
                     textDecoration: "none",
@@ -185,11 +180,18 @@ export default function Header() {
             ))}
           </ul>
 
-          {/* CTA Button + Burger */}
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+          {/* CTA Buttons + Burger */}
+          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+            <Link
+              href="/client/login"
+              className="nv-btn nv-btn-ghost nv-header-cta"
+              style={{ fontSize: "0.85rem", padding: "0.625rem 1.25rem" }}
+            >
+              Espace client
+            </Link>
             <Link
               href="/contact"
-              className="nv-btn nv-btn-primary"
+              className="nv-btn nv-btn-primary nv-header-cta"
               style={{ fontSize: "0.85rem", padding: "0.625rem 1.5rem" }}
             >
               Démarrer un projet
@@ -250,8 +252,8 @@ export default function Header() {
           style={{
             position: "fixed",
             inset: 0,
-            background: "rgba(5, 5, 8, 0.97)",
-            backdropFilter: "blur(20px)",
+            background: "rgba(10, 14, 26, 0.97)",
+            backdropFilter: "blur(12px)",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -283,27 +285,47 @@ export default function Header() {
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/contact"
-            onClick={() => setIsOpen(false)}
-            className="nv-btn nv-btn-primary"
-            style={{
-              marginTop: "1rem",
-              animation: "fadeInUp 0.4s ease 0.3s both",
-              fontSize: "1rem",
-              padding: "0.875rem 2.5rem",
-            }}
-          >
-            Démarrer un projet ✨
-          </Link>
+          <div className="nv-mobile-actions">
+            <Link
+              href="/client/login"
+              onClick={() => setIsOpen(false)}
+              className="nv-btn nv-btn-ghost"
+            >
+              Espace client
+            </Link>
+            <Link
+              href="/contact"
+              onClick={() => setIsOpen(false)}
+              className="nv-btn nv-btn-primary"
+            >
+              Démarrer un projet
+            </Link>
+          </div>
         </div>
       )}
 
       <style>{`
-        @media (max-width: 768px) {
+        .nv-mobile-actions {
+          display: flex;
+          gap: 0.75rem;
+          margin-top: 1rem;
+          animation: fadeInUp 0.4s ease 0.3s both;
+        }
+        .nv-mobile-actions .nv-btn {
+          min-height: 44px;
+          padding: 0.75rem 1.5rem;
+        }
+        @media (max-width: 1024px) {
           .nv-desktop-nav { display: none !important; }
           .nv-burger { display: flex !important; }
-          .nv-btn.nv-btn-primary { display: none !important; }
+          .nv-header-cta { display: none !important; }
+        }
+        @media (max-width: 520px) {
+          .nv-mobile-actions {
+            width: min(100% - 2rem, 320px);
+            flex-direction: column;
+          }
+          .nv-mobile-actions .nv-btn { justify-content: center; }
         }
       `}</style>
     </header>

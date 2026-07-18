@@ -66,8 +66,8 @@ export default function BlogPage() {
                     <div
                       style={{
                         height: "200px",
-                        background: `linear-gradient(135deg, rgba(139,92,246,0.15) 0%, rgba(${
-                          post.categorySlug === "design" ? "236,72,153" : post.categorySlug === "developpement" ? "99,102,241" : "34,211,238"
+                        background: `linear-gradient(135deg, rgba(26,111,212,0.16) 0%, rgba(${
+                          post.categorySlug === "design" ? "0,200,224" : post.categorySlug === "developpement" ? "21,101,192" : "26,111,212"
                         },0.1) 100%)`,
                         display: "flex",
                         alignItems: "center",

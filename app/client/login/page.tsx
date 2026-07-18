@@ -15,11 +15,19 @@ export default function LoginPage() {
         alignItems: "center",
         justifyContent: "center",
         padding: "2rem",
+        position: "relative",
+        zIndex: 1,
       }}
     >
       <div
         className="nv-card"
-        style={{ width: "100%", maxWidth: "450px", padding: "3rem 2rem" }}
+        style={{ 
+          width: "100%", 
+          maxWidth: "450px", 
+          padding: "3rem 2rem",
+          position: "relative",
+          zIndex: 10,
+        }}
       >
         <div style={{ textAlign: "center", marginBottom: "2.5rem" }}>
           <h1 style={{ fontSize: "1.75rem", marginBottom: "0.5rem" }}>Connexion</h1>
@@ -28,8 +36,8 @@ export default function LoginPage() {
           </p>
         </div>
 
-        <form action={action} style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
-          <div>
+        <form action={action} style={{ display: "flex", flexDirection: "column", gap: "1.25rem", position: "relative", zIndex: 20 }}>
+          <div style={{ position: "relative", zIndex: 20 }}>
             <label htmlFor="email" className="nv-label">Email professionnel</label>
             <input
               type="text"
@@ -38,15 +46,16 @@ export default function LoginPage() {
               className="nv-input"
               placeholder="vous@entreprise.com"
               required
+              style={{ position: "relative", zIndex: 20 }}
             />
             {state?.errors?.email && (
-              <span style={{ color: "#ef4444", fontSize: "0.8rem", marginTop: "0.25rem", display: "block" }}>
+              <span style={{ color: "var(--nv-error)", fontSize: "0.8rem", marginTop: "0.25rem", display: "block" }}>
                 {state.errors.email[0]}
               </span>
             )}
           </div>
 
-          <div>
+          <div style={{ position: "relative", zIndex: 20 }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <label htmlFor="password" className="nv-label" style={{ margin: 0 }}>Mot de passe</label>
               <Link href="/client/forgot-password" style={{ fontSize: "0.8rem", color: "var(--nv-accent-violet)", textDecoration: "none" }}>
@@ -58,11 +67,11 @@ export default function LoginPage() {
               id="password"
               name="password"
               className="nv-input"
-              style={{ marginTop: "0.5rem" }}
+              style={{ marginTop: "0.5rem", position: "relative", zIndex: 20 }}
               required
             />
             {state?.errors?.password && (
-              <span style={{ color: "#ef4444", fontSize: "0.8rem", marginTop: "0.25rem", display: "block" }}>
+              <span style={{ color: "var(--nv-error)", fontSize: "0.8rem", marginTop: "0.25rem", display: "block" }}>
                 {state.errors.password[0]}
               </span>
             )}

@@ -12,13 +12,13 @@ export default async function AdminSettingsPage() {
       <form action={updateSettings} className="nv-card" style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
         
         <div>
-          <h2 style={{ fontSize: "1.25rem", marginBottom: "1rem", borderBottom: "1px solid var(--nv-border-light)", paddingBottom: "0.5rem" }}>Informations de l'Agence</h2>
+          <h2 style={{ fontSize: "1.25rem", marginBottom: "1rem", borderBottom: "1px solid var(--nv-border-light)", paddingBottom: "0.5rem" }}>Informations de l’Agence</h2>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem" }}>
-            <div><label className="nv-label">Nom de l'entreprise</label><input type="text" name="agencyName" className="nv-input" defaultValue={settings?.agencyName || "NOVAVOX"} required /></div>
+            <div><label className="nv-label">Nom de l’entreprise</label><input type="text" name="agencyName" className="nv-input" defaultValue={settings?.agencyName || "NOVAVOX"} required /></div>
             <div><label className="nv-label">SIRET</label><input type="text" name="agencySiret" className="nv-input" defaultValue={settings?.agencySiret || ""} /></div>
-            <div><label className="nv-label">Email de contact</label><input type="email" name="agencyEmail" className="nv-input" defaultValue={settings?.agencyEmail || "contact@novavox.fr"} required /></div>
-            <div><label className="nv-label">Téléphone</label><input type="text" name="agencyPhone" className="nv-input" defaultValue={settings?.agencyPhone || ""} /></div>
-            <div style={{ gridColumn: "1 / -1" }}><label className="nv-label">Adresse postale</label><input type="text" name="agencyAddress" className="nv-input" defaultValue={settings?.agencyAddress || ""} /></div>
+            <div><label className="nv-label">Email de contact</label><input type="email" name="agencyEmail" className="nv-input" defaultValue={settings?.agencyEmail || "novavox30@gmail.com"} required /></div>
+            <div><label className="nv-label">Téléphone</label><input type="text" name="agencyPhone" className="nv-input" defaultValue={settings?.agencyPhone || "0162089161"} /></div>
+            <div style={{ gridColumn: "1 / -1" }}><label className="nv-label">Adresse postale</label><input type="text" name="agencyAddress" className="nv-input" defaultValue={settings?.agencyAddress || "Cotonou, Bénin"} /></div>
           </div>
         </div>
 

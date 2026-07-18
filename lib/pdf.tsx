@@ -46,13 +46,13 @@ export const NovavoxDocument = ({ data, type }: { data: DocumentData, type: "DEV
         <View>
           <Text style={styles.logoText}>NOVAVOX</Text>
           <Text style={{ marginTop: 5, color: "#6b7280" }}>Agence Créative & Digitale</Text>
-          <Text style={{ color: "#6b7280" }}>contact@novavox.fr</Text>
+          <Text style={{ color: "#6b7280" }}>novavox30@gmail.com</Text>
         </View>
         <View style={{ textAlign: "right" }}>
           <Text style={styles.title}>{type}</Text>
           <Text style={styles.label}>N° : {data.number}</Text>
           <Text style={styles.label}>Date : {new Date(data.createdAt).toLocaleDateString("fr-FR")}</Text>
-          {data.validUntil && <Text style={styles.label}>Valide jusqu'au : {new Date(data.validUntil).toLocaleDateString("fr-FR")}</Text>}
+          {data.validUntil && <Text style={styles.label}>Valide jusqu’au : {new Date(data.validUntil).toLocaleDateString("fr-FR")}</Text>}
           {data.dueDate && <Text style={styles.label}>Échéance : {new Date(data.dueDate).toLocaleDateString("fr-FR")}</Text>}
         </View>
       </View>
@@ -62,9 +62,9 @@ export const NovavoxDocument = ({ data, type }: { data: DocumentData, type: "DEV
           <View style={styles.colHalf}>
             <Text style={styles.sectionTitle}>Émetteur</Text>
             <Text style={styles.bold}>NOVAVOX</Text>
-            <Text>123 Avenue de la Création</Text>
-            <Text>75000 Paris, France</Text>
-            <Text>SIRET : 123 456 789 00012</Text>
+            <Text>Cotonou, Bénin</Text>
+            <Text>Tél. : 01 62 08 91 61</Text>
+            <Text>Email : novavox30@gmail.com</Text>
           </View>
           <View style={styles.colHalf}>
             <Text style={styles.sectionTitle}>Client</Text>

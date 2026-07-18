@@ -40,7 +40,7 @@ export default function AdminLoginPage() {
               required
             />
             {state?.errors?.email && (
-              <span style={{ color: "#ef4444", fontSize: "0.8rem", marginTop: "0.25rem", display: "block" }}>
+              <span style={{ color: "var(--nv-error)", fontSize: "0.8rem", marginTop: "0.25rem", display: "block" }}>
                 {state.errors.email[0]}
               </span>
             )}
@@ -57,7 +57,7 @@ export default function AdminLoginPage() {
               required
             />
             {state?.errors?.password && (
-              <span style={{ color: "#ef4444", fontSize: "0.8rem", marginTop: "0.25rem", display: "block" }}>
+              <span style={{ color: "var(--nv-error)", fontSize: "0.8rem", marginTop: "0.25rem", display: "block" }}>
                 {state.errors.password[0]}
               </span>
             )}

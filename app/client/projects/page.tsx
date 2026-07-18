@@ -1,6 +1,16 @@
 import { db } from "@/lib/db";
 import { getSession } from "@/lib/auth";
 import Link from "next/link";
+import type { CSSProperties } from "react";
+import styles from "../portal.module.css";
+
+const statusMap = {
+  pending: { label: "Préparation", className: styles.pending },
+  active: { label: "En production", className: styles.active },
+  revision: { label: "En révision", className: styles.revision },
+  delivered: { label: "Livré", className: styles.delivered },
+  archived: { label: "Archivé", className: styles.archived },
+} as const;
 
 export default async function ProjectsPage() {
   const session = await getSession();
@@ -8,102 +18,84 @@ export default async function ProjectsPage() {
 
   const projects = await db.project.findMany({
     where: { clientId: session.userId },
+    include: { _count: { select: { files: true, messages: true, quotes: true } } },
     orderBy: { updatedAt: "desc" },
   });
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "pending": return { bg: "rgba(245,158,11,0.1)", text: "#f59e0b", label: "En attente" };
-      case "active": return { bg: "rgba(139,92,246,0.1)", text: "var(--nv-accent-violet)", label: "En cours" };
-      case "revision": return { bg: "rgba(236,72,153,0.1)", text: "var(--nv-accent-pink)", label: "En révision" };
-      case "delivered": return { bg: "rgba(34,211,238,0.1)", text: "var(--nv-accent-cyan)", label: "Livré" };
-      case "archived": return { bg: "rgba(255,255,255,0.05)", text: "var(--nv-text-muted)", label: "Archivé" };
-      default: return { bg: "rgba(255,255,255,0.05)", text: "var(--nv-text-secondary)", label: status };
-    }
-  };
+  const featured = projects.find((project) => ["active", "revision", "pending"].includes(project.status)) || projects[0];
+  const remaining = projects.filter((project) => project.id !== featured?.id);
+  const activeCount = projects.filter((project) => ["pending", "active", "revision"].includes(project.status)).length;
+  const deliveredCount = projects.filter((project) => project.status === "delivered").length;
 
   return (
     <div>
-      <div style={{ marginBottom: "2rem", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <h1 style={{ fontSize: "2rem", margin: 0 }}>Mes Projets</h1>
-        <Link href="/client/brief/new" className="nv-btn nv-btn-primary">
-          + Nouveau Projet
-        </Link>
-      </div>
-
-      {projects.length === 0 ? (
-        <div className="nv-card" style={{ textAlign: "center", padding: "4rem" }}>
-          <span style={{ fontSize: "3rem", display: "block", marginBottom: "1rem" }}>📁</span>
-          <h2 style={{ marginBottom: "0.5rem" }}>Aucun projet</h2>
-          <p style={{ color: "var(--nv-text-secondary)", marginBottom: "1.5rem" }}>
-            Vous n'avez pas encore de projet avec NOVAVOX.
-          </p>
-          <Link href="/client/brief/new" className="nv-btn nv-btn-primary">
-            Démarrer un projet
-          </Link>
+      <header className={styles.pageHeaderRefined}>
+        <div>
+          <p className={styles.eyebrow}>Studio de production</p>
+          <h1 className={styles.pageTitle}>Mes projets</h1>
+          <p className={styles.pageIntro}>L’avancement réel, les prochaines échéances et tous vos échanges au même endroit.</p>
         </div>
+        <Link href="/client/brief/new" className={styles.primaryButton}>Lancer un nouveau projet <span>+</span></Link>
+      </header>
+
+      {featured ? (
+        <>
+          <section className={styles.projectSpotlight}>
+            <div className={styles.spotlightCopy}>
+              <div className={styles.spotlightTopline}>
+                <span>Projet à la une</span>
+                <span className={`${styles.status} ${statusMap[featured.status as keyof typeof statusMap]?.className || styles.pending}`}>{statusMap[featured.status as keyof typeof statusMap]?.label || featured.status}</span>
+              </div>
+              <p className={styles.spotlightService}>{featured.serviceType}</p>
+              <h2>{featured.name}</h2>
+              <p className={styles.spotlightText}>{featured.progress >= 100 ? "Le projet est finalisé. Vos livrables restent accessibles dans le dossier." : "Votre équipe NOVAVOX fait avancer ce projet. Ouvrez le dossier pour consulter les derniers échanges et documents."}</p>
+              <Link href={`/client/projects/${featured.id}`} className={styles.spotlightButton}>Ouvrir le dossier <span>↗</span></Link>
+            </div>
+            <div className={styles.spotlightProgress}>
+              <div className={styles.progressRing} style={{ "--project-progress": `${featured.progress * 3.6}deg` } as CSSProperties}>
+                <div><strong>{featured.progress}%</strong><span>accompli</span></div>
+              </div>
+              <div className={styles.spotlightMetrics}>
+                <div><strong>{featured._count.messages}</strong><span>messages</span></div>
+                <div><strong>{featured._count.files}</strong><span>fichiers</span></div>
+                <div><strong>{featured._count.quotes}</strong><span>devis</span></div>
+              </div>
+              <div className={styles.spotlightDeadline}><span>Livraison estimée</span><strong>{featured.estimatedAt ? featured.estimatedAt.toLocaleDateString("fr-FR", { day: "2-digit", month: "long", year: "numeric" }) : "À confirmer avec l’équipe"}</strong></div>
+            </div>
+          </section>
+
+          <section className={styles.projectSummaryStrip}>
+            <div><strong>{projects.length.toString().padStart(2, "0")}</strong><span>projets au total</span></div>
+            <div><strong>{activeCount.toString().padStart(2, "0")}</strong><span>en mouvement</span></div>
+            <div><strong>{deliveredCount.toString().padStart(2, "0")}</strong><span>livrés</span></div>
+            <div><strong>{projects.reduce((sum, project) => sum + project._count.files, 0).toString().padStart(2, "0")}</strong><span>fichiers partagés</span></div>
+          </section>
+
+          {remaining.length > 0 && (
+            <section className={styles.projectArchive}>
+              <div className={styles.sectionHeaderRow}><div><p className={styles.sectionKicker}>Tous les dossiers</p><h2 className={styles.sectionTitle}>Autres projets</h2></div><span>{remaining.length} résultat{remaining.length > 1 ? "s" : ""}</span></div>
+              <div className={styles.projectGridPremium}>
+                {remaining.map((project, index) => {
+                  const status = statusMap[project.status as keyof typeof statusMap] ?? statusMap.pending;
+                  return (
+                    <Link href={`/client/projects/${project.id}`} className={styles.projectCardPremium} key={project.id}>
+                      <div className={styles.projectCardNumber}>{String(index + 2).padStart(2, "0")}</div>
+                      <div className={styles.projectCardTop}><span>{project.serviceType}</span><span className={`${styles.status} ${status.className}`}>{status.label}</span></div>
+                      <h3>{project.name}</h3>
+                      <div className={styles.projectCardProgress}><div><span>Avancement</span><strong>{project.progress}%</strong></div><i><b style={{ width: `${project.progress}%` }} /></i></div>
+                      <div className={styles.projectCardFooter}><span>{project._count.files} fichier{project._count.files > 1 ? "s" : ""}</span><span>Mis à jour {project.updatedAt.toLocaleDateString("fr-FR", { day: "2-digit", month: "short" })}</span><b>↗</b></div>
+                    </Link>
+                  );
+                })}
+              </div>
+            </section>
+          )}
+        </>
       ) : (
-        <div style={{ display: "grid", gap: "1rem" }}>
-          {projects.map((project) => {
-            const statusStyle = getStatusColor(project.status);
-            return (
-              <Link key={project.id} href={`/client/projects/${project.id}`} style={{ textDecoration: "none" }}>
-                <div
-                  className="nv-card"
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "2fr 1fr 1fr auto",
-                    gap: "1.5rem",
-                    alignItems: "center",
-                    transition: "transform 0.2s ease, border-color 0.2s ease",
-                  }}
-                >
-                  <div>
-                    <h3 style={{ fontSize: "1.1rem", margin: "0 0 0.25rem", color: "var(--nv-text-primary)" }}>
-                      {project.name}
-                    </h3>
-                    <p style={{ fontSize: "0.85rem", color: "var(--nv-text-secondary)", margin: 0 }}>
-                      {project.serviceType}
-                    </p>
-                  </div>
-                  
-                  <div>
-                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.8rem", color: "var(--nv-text-secondary)", marginBottom: "0.4rem" }}>
-                      <span>Progression</span>
-                      <span>{project.progress}%</span>
-                    </div>
-                    <div style={{ width: "100%", height: "6px", background: "rgba(255,255,255,0.1)", borderRadius: "3px", overflow: "hidden" }}>
-                      <div style={{ width: `${project.progress}%`, height: "100%", background: statusStyle.text, borderRadius: "3px" }} />
-                    </div>
-                  </div>
-
-                  <div>
-                    <p style={{ fontSize: "0.8rem", color: "var(--nv-text-muted)", margin: "0 0 0.25rem" }}>Livraison estimée</p>
-                    <p style={{ fontSize: "0.9rem", color: "var(--nv-text-primary)", margin: 0, fontWeight: 500 }}>
-                      {project.estimatedAt ? new Date(project.estimatedAt).toLocaleDateString("fr-FR") : "À définir"}
-                    </p>
-                  </div>
-
-                  <div>
-                    <span
-                      style={{
-                        padding: "0.35rem 0.75rem",
-                        borderRadius: "100px",
-                        fontSize: "0.8rem",
-                        fontWeight: 600,
-                        background: statusStyle.bg,
-                        color: statusStyle.text,
-                        whiteSpace: "nowrap",
-                      }}
-                    >
-                      {statusStyle.label}
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
+        <section className={styles.emptyPremium}>
+          <div className={styles.emptyVisual}><span>01</span><i /></div>
+          <div><h2>Votre prochain projet mérite un beau départ.</h2><p>Décrivez votre besoin. Une fois la commande approuvée, son espace de production apparaîtra ici.</p><Link href="/client/brief/new" className={styles.primaryButton}>Créer ma première commande</Link></div>
+        </section>
       )}
     </div>
   );

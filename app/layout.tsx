@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import SiteChrome from "./components/SiteChrome";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -85,9 +84,7 @@ export default function RootLayout({
       className={`${inter.variable} ${outfit.variable}`}
     >
       <body>
-        <Header />
-        <main style={{ position: "relative", zIndex: 10 }}>{children}</main>
-        <Footer />
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );

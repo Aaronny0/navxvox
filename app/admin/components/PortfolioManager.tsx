@@ -110,7 +110,7 @@ export function PortfolioManager({ projects }: { projects: Project[] }) {
                       <button 
                         onClick={async () => { if(confirm("Supprimer ce projet ?")) await deletePortfolioProject(project.id); }} 
                         className="nv-btn" 
-                        style={{ flex: 1, padding: "0.5rem", fontSize: "0.85rem", background: "rgba(239, 68, 68, 0.1)", color: "#ef4444" }}
+                        style={{ flex: 1, padding: "0.5rem", fontSize: "0.85rem", background: "rgba(198, 40, 40, 0.12)", color: "var(--nv-error)" }}
                       >
                         Supprimer
                       </button>

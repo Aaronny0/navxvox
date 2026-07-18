@@ -1,5 +1,16 @@
 import { db } from "@/lib/db";
 import { getSession } from "@/lib/auth";
+import styles from "../portal.module.css";
+
+const statusMap = {
+  paid: { label: "Réglée", className: styles.invoicePaid },
+  viewed: { label: "Consultée", className: styles.invoiceViewed },
+  sent: { label: "À régler", className: styles.invoiceSent },
+} as const;
+
+function money(value: number) {
+  return new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(value);
+}
 
 export default async function InvoicesPage() {
   const session = await getSession();
@@ -7,70 +18,83 @@ export default async function InvoicesPage() {
 
   const invoices = await db.invoice.findMany({
     where: { clientId: session.userId },
+    include: { lines: true },
     orderBy: { createdAt: "desc" },
   });
 
+  const paidTotal = invoices.filter((invoice) => invoice.status === "paid").reduce((sum, invoice) => sum + invoice.amountTTC, 0);
+  const outstanding = invoices.filter((invoice) => invoice.status !== "paid").reduce((sum, invoice) => sum + invoice.amountTTC, 0);
+  const nextDue = invoices
+    .filter((invoice) => invoice.status !== "paid" && invoice.dueDate)
+    .sort((a, b) => a.dueDate!.getTime() - b.dueDate!.getTime())[0];
+
   return (
     <div>
-      <div style={{ marginBottom: "2rem" }}>
-        <h1 style={{ fontSize: "2rem", margin: "0 0 0.5rem" }}>Mes Factures</h1>
-        <p style={{ color: "var(--nv-text-secondary)", margin: 0 }}>
-          Retrouvez ici l'historique de vos factures et paiements.
-        </p>
-      </div>
+      <header className={styles.pageHeaderRefined}>
+        <div>
+          <p className={styles.eyebrow}>Centre financier</p>
+          <h1 className={styles.pageTitle}>Factures</h1>
+          <p className={styles.pageIntro}>Votre situation financière, lisible en quelques secondes.</p>
+        </div>
+        <div className={styles.headerPill}>{invoices.length.toString().padStart(2, "0")} document{invoices.length > 1 ? "s" : ""}</div>
+      </header>
 
-      <div className="nv-card" style={{ padding: 0, overflow: "hidden" }}>
-        {invoices.length === 0 ? (
-          <div style={{ textAlign: "center", padding: "4rem 2rem" }}>
-            <span style={{ fontSize: "3rem", display: "block", marginBottom: "1rem" }}>🧾</span>
-            <p style={{ color: "var(--nv-text-muted)" }}>Aucune facture pour le moment.</p>
+      <section className={styles.financeHero}>
+        <div className={styles.financeHeroPrimary}>
+          <div className={styles.heroMiniLabel}>Solde à régler</div>
+          <div className={styles.financeAmount}>{money(outstanding)}</div>
+          <p className={styles.financeCaption}>{outstanding > 0 ? "Retrouvez le détail et les échéances ci-dessous." : "Vous êtes parfaitement à jour. Aucun règlement en attente."}</p>
+          {nextDue ? (
+            <div className={styles.nextDue}>
+              <span>Prochaine échéance</span>
+              <strong>{nextDue.dueDate!.toLocaleDateString("fr-FR", { day: "2-digit", month: "long", year: "numeric" })}</strong>
+            </div>
+          ) : <div className={styles.nextDue}><span>Situation</span><strong>Compte à jour</strong></div>}
+        </div>
+        <div className={styles.financeHeroStats}>
+          <div className={styles.financeHeroStat}><span>Total réglé</span><strong>{money(paidTotal)}</strong><small>depuis votre arrivée</small></div>
+          <div className={styles.financeHeroStat}><span>Documents</span><strong>{invoices.length}</strong><small>{invoices.filter((invoice) => invoice.status === "paid").length} facture{invoices.filter((invoice) => invoice.status === "paid").length > 1 ? "s" : ""} réglée{invoices.filter((invoice) => invoice.status === "paid").length > 1 ? "s" : ""}</small></div>
+        </div>
+      </section>
+
+      <section className={styles.ledger}>
+        <div className={styles.ledgerHeader}>
+          <div><p className={styles.sectionKicker}>Historique</p><h2 className={styles.sectionTitle}>Vos documents</h2></div>
+          <span className={styles.secureNote}><span className={styles.secureDot} />Documents sécurisés</span>
+        </div>
+
+        {invoices.length ? (
+          <div className={styles.invoiceList}>
+            {invoices.map((invoice) => {
+              const status = statusMap[invoice.status as keyof typeof statusMap] ?? statusMap.sent;
+              const overdue = invoice.status !== "paid" && invoice.dueDate && invoice.dueDate < new Date();
+              return (
+                <article className={styles.invoiceRow} key={invoice.id}>
+                  <div className={styles.documentMark}><span>PDF</span></div>
+                  <div className={styles.invoiceIdentity}>
+                    <div className={styles.invoiceNumber}>{invoice.number}</div>
+                    <div className={styles.invoiceSub}>{invoice.lines.length || 1} prestation{invoice.lines.length > 1 ? "s" : ""} · émise le {invoice.createdAt.toLocaleDateString("fr-FR", { day: "2-digit", month: "short", year: "numeric" })}</div>
+                  </div>
+                  <div className={styles.invoiceDue}>
+                    <span>{invoice.status === "paid" ? "Réglée le" : "Échéance"}</span>
+                    <strong className={overdue ? styles.overdue : ""}>{invoice.status === "paid" && invoice.paidAt ? invoice.paidAt.toLocaleDateString("fr-FR") : invoice.dueDate?.toLocaleDateString("fr-FR") || "À réception"}</strong>
+                  </div>
+                  <div className={styles.invoicePrice}><strong>{money(invoice.amountTTC)}</strong><span>{money(invoice.amountHT)} HT</span></div>
+                  <div className={styles.invoiceActions}>
+                    <span className={`${styles.status} ${status.className}`}>{status.label}</span>
+                    {invoice.pdfUrl ? <a className={styles.pdfButton} href={invoice.pdfUrl} target="_blank" rel="noreferrer" aria-label={`Ouvrir la facture ${invoice.number}`}>Ouvrir <span>↗</span></a> : <span className={styles.preparing}>Préparation</span>}
+                  </div>
+                </article>
+              );
+            })}
           </div>
         ) : (
-          <table style={{ width: "100%", borderCollapse: "collapse" }}>
-            <thead>
-              <tr style={{ background: "rgba(255,255,255,0.02)", borderBottom: "1px solid var(--nv-border-light)", textAlign: "left" }}>
-                <th style={{ padding: "1rem 1.5rem", fontWeight: 600, fontSize: "0.85rem", color: "var(--nv-text-secondary)" }}>Numéro</th>
-                <th style={{ padding: "1rem 1.5rem", fontWeight: 600, fontSize: "0.85rem", color: "var(--nv-text-secondary)" }}>Date</th>
-                <th style={{ padding: "1rem 1.5rem", fontWeight: 600, fontSize: "0.85rem", color: "var(--nv-text-secondary)" }}>Montant TTC</th>
-                <th style={{ padding: "1rem 1.5rem", fontWeight: 600, fontSize: "0.85rem", color: "var(--nv-text-secondary)" }}>Statut</th>
-                <th style={{ padding: "1rem 1.5rem", fontWeight: 600, fontSize: "0.85rem", color: "var(--nv-text-secondary)", textAlign: "right" }}>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {invoices.map((inv) => (
-                <tr key={inv.id} style={{ borderBottom: "1px solid var(--nv-border-light)" }}>
-                  <td style={{ padding: "1rem 1.5rem", fontWeight: 500 }}>{inv.number}</td>
-                  <td style={{ padding: "1rem 1.5rem", fontSize: "0.9rem" }}>{new Date(inv.createdAt).toLocaleDateString("fr-FR")}</td>
-                  <td style={{ padding: "1rem 1.5rem", fontWeight: 600 }}>{inv.amountTTC.toFixed(2)} €</td>
-                  <td style={{ padding: "1rem 1.5rem" }}>
-                    <span
-                      style={{
-                        padding: "0.25rem 0.6rem",
-                        borderRadius: "100px",
-                        fontSize: "0.75rem",
-                        fontWeight: 600,
-                        background: inv.status === "paid" ? "rgba(34,197,94,0.1)" : inv.status === "sent" ? "rgba(245,158,11,0.1)" : "rgba(255,255,255,0.1)",
-                        color: inv.status === "paid" ? "#22c55e" : inv.status === "sent" ? "#f59e0b" : "var(--nv-text-secondary)",
-                      }}
-                    >
-                      {inv.status === "paid" ? "Payée" : inv.status === "viewed" ? "Vue" : "Envoyée"}
-                    </span>
-                  </td>
-                  <td style={{ padding: "1rem 1.5rem", textAlign: "right" }}>
-                    {inv.pdfUrl ? (
-                      <a href={inv.pdfUrl} target="_blank" rel="noreferrer" className="nv-btn nv-btn-ghost" style={{ padding: "0.5rem 1rem", fontSize: "0.8rem" }}>
-                        Télécharger PDF
-                      </a>
-                    ) : (
-                      <span style={{ fontSize: "0.8rem", color: "var(--nv-text-muted)" }}>En cours...</span>
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className={styles.emptyPremium}>
+            <div className={styles.emptyVisual}><span>0</span><i /></div>
+            <div><h2>Aucune facture à classer</h2><p>Vos prochains documents financiers apparaîtront ici, prêts à être consultés et téléchargés.</p></div>
+          </div>
         )}
-      </div>
+      </section>
     </div>
   );
 }

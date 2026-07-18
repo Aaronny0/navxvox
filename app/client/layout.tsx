@@ -1,5 +1,6 @@
 import { getSession } from "@/lib/auth";
 import ClientSidebar from "./components/ClientSidebar";
+import styles from "./portal.module.css";
 
 export default async function ClientLayout({
   children,
@@ -14,17 +15,10 @@ export default async function ClientLayout({
   }
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh", background: "var(--nv-bg-primary)" }}>
+    <div className={styles.shell}>
       <ClientSidebar user={session} />
-      <main
-        style={{
-          flex: 1,
-          marginLeft: "280px", // Match sidebar width
-          padding: "3rem",
-          minHeight: "100vh",
-        }}
-      >
-        {children}
+      <main className={styles.main}>
+        <div className={styles.content}>{children}</div>
       </main>
     </div>
   );

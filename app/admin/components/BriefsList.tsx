@@ -1,102 +1,93 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState, useTransition } from "react";
 import { acceptBrief, refuseBrief } from "../actions/briefs";
+import styles from "../admin-orders.module.css";
 
 type Brief = {
-  id: string;
-  serviceType: string;
-  projectName: string | null;
-  budget: string | null;
-  deadline: string | null;
-  description: string;
-  status: string;
-  createdAt: Date;
+  id: string; serviceType: string; projectName: string | null; budget: string | null; deadline: string | null;
+  description: string; status: string; refusalReason: string | null; createdAt: Date;
   client: { companyName: string; firstName: string; lastName: string; email: string };
 };
 
+const statusMap = {
+  received: { label: "À décider", className: styles.received }, converted: { label: "Approuvée", className: styles.converted }, refused: { label: "Rejetée", className: styles.refused },
+} as const;
+
 export function BriefsList({ briefs }: { briefs: Brief[] }) {
-  const [refusalReason, setRefusalReason] = useState("");
+  const [filter, setFilter] = useState("received");
   const [refusingId, setRefusingId] = useState<string | null>(null);
+  const [reason, setReason] = useState("");
+  const [pendingId, setPendingId] = useState<string | null>(null);
+  const [feedback, setFeedback] = useState("");
+  const [isPending, startTransition] = useTransition();
+  const visible = useMemo(() => filter === "all" ? briefs : briefs.filter((brief) => brief.status === filter), [briefs, filter]);
 
-  const handleAccept = async (id: string) => {
-    await acceptBrief(id);
-  };
+  function approve(id: string) {
+    setFeedback(""); setPendingId(id);
+    startTransition(async () => {
+      try { await acceptBrief(id); } catch (error) { setFeedback(error instanceof Error ? error.message : "Impossible d’approuver la commande"); }
+      finally { setPendingId(null); }
+    });
+  }
 
-  const handleRefuse = async (id: string) => {
-    if (!refusalReason) return alert("Veuillez indiquer un motif de refus.");
-    await refuseBrief(id, refusalReason);
-    setRefusingId(null);
-    setRefusalReason("");
-  };
+  function reject(id: string) {
+    if (reason.trim().length < 8) { setFeedback("Précisez le motif du rejet en au moins 8 caractères."); return; }
+    setFeedback(""); setPendingId(id);
+    startTransition(async () => {
+      try { await refuseBrief(id, reason); setRefusingId(null); setReason(""); }
+      catch (error) { setFeedback(error instanceof Error ? error.message : "Impossible de rejeter la commande"); }
+      finally { setPendingId(null); }
+    });
+  }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-      {briefs.map((brief) => (
-        <div key={brief.id} className="nv-card">
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "1.5rem" }}>
-            <div>
-              <h2 style={{ fontSize: "1.25rem", margin: "0 0 0.5rem" }}>
-                {brief.projectName || `Brief: ${brief.serviceType}`}
-              </h2>
-              <p style={{ color: "var(--nv-text-secondary)", margin: 0 }}>
-                Par {brief.client.companyName} ({brief.client.firstName} {brief.client.lastName})
-              </p>
-            </div>
-            <span className="nv-badge">{new Date(brief.createdAt).toLocaleDateString()}</span>
-          </div>
+    <div>
+      <div className={styles.toolbar}>
+        <div className={styles.tabs} role="tablist" aria-label="Filtrer les commandes">
+          {[["received", "À décider"], ["converted", "Approuvées"], ["refused", "Rejetées"], ["all", "Toutes"]].map(([value, label]) => (
+            <button key={value} className={`${styles.tab} ${filter === value ? styles.tabActive : ""}`} onClick={() => setFilter(value)} role="tab" aria-selected={filter === value}>{label}</button>
+          ))}
+        </div>
+        <span className={styles.count}>{visible.length} commande{visible.length > 1 ? "s" : ""}</span>
+      </div>
+      <p className={styles.feedback} aria-live="polite">{feedback}</p>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1.5rem", padding: "1rem", background: "rgba(255,255,255,0.02)", borderRadius: "0.5rem" }}>
-            <div><strong style={{ color: "var(--nv-text-muted)" }}>Type:</strong> {brief.serviceType}</div>
-            <div><strong style={{ color: "var(--nv-text-muted)" }}>Budget:</strong> {brief.budget || "Non spécifié"}</div>
-            <div><strong style={{ color: "var(--nv-text-muted)" }}>Délai:</strong> {brief.deadline || "Non spécifié"}</div>
-            <div><strong style={{ color: "var(--nv-text-muted)" }}>Email:</strong> {brief.client.email}</div>
-          </div>
-
-          <div style={{ marginBottom: "2rem" }}>
-            <h3 style={{ fontSize: "1rem", marginBottom: "0.5rem", color: "var(--nv-text-secondary)" }}>Description</h3>
-            <p style={{ whiteSpace: "pre-wrap", lineHeight: 1.6 }}>{brief.description}</p>
-          </div>
-
-          {refusingId === brief.id ? (
-            <div style={{ padding: "1rem", background: "rgba(239, 68, 68, 0.05)", borderRadius: "0.5rem", borderLeft: "4px solid #ef4444" }}>
-              <label style={{ display: "block", marginBottom: "0.5rem", fontWeight: 600 }}>Motif du refus :</label>
-              <textarea 
-                className="nv-input" 
-                value={refusalReason} 
-                onChange={e => setRefusalReason(e.target.value)}
-                placeholder="Expliquez pourquoi le brief est refusé..."
-                style={{ width: "100%", minHeight: "80px", marginBottom: "1rem" }}
-              />
-              <div style={{ display: "flex", gap: "1rem" }}>
-                <button className="nv-btn" style={{ background: "#ef4444", color: "white" }} onClick={() => handleRefuse(brief.id)}>Confirmer le refus</button>
-                <button className="nv-btn" onClick={() => setRefusingId(null)}>Annuler</button>
+      <div className={styles.list}>
+        {visible.map((brief) => {
+          const status = statusMap[brief.status as keyof typeof statusMap] ?? statusMap.received;
+          const busy = isPending && pendingId === brief.id;
+          return (
+            <article className={styles.card} key={brief.id}>
+              <div className={styles.cardMain}>
+                <div>
+                  <div className={styles.orderTop}><h2 className={styles.orderName}>{brief.projectName || brief.serviceType}</h2><span className={`${styles.status} ${status.className}`}>{status.label}</span></div>
+                  <p className={styles.client}>{brief.client.companyName} · {brief.client.firstName} {brief.client.lastName}</p>
+                  <p className={styles.description}>{brief.description}</p>
+                </div>
+                <div className={styles.facts}>
+                  <div><div className={styles.factLabel}>Prestation</div><div className={styles.factValue}>{brief.serviceType}</div></div>
+                  <div><div className={styles.factLabel}>Budget</div><div className={styles.factValue}>{brief.budget || "Non défini"}</div></div>
+                  <div><div className={styles.factLabel}>Échéance</div><div className={styles.factValue}>{brief.deadline || "Flexible"}</div></div>
+                  <div><div className={styles.factLabel}>Reçue le</div><div className={styles.factValue}>{new Date(brief.createdAt).toLocaleDateString("fr-FR")}</div></div>
+                  <div><div className={styles.factLabel}>Contact</div><div className={styles.factValue}>{brief.client.email}</div></div>
+                  <div><div className={styles.factLabel}>Référence</div><div className={styles.factValue}>{brief.id.slice(-7).toUpperCase()}</div></div>
+                </div>
+                {brief.status === "received" && <div className={styles.actions}><button className={styles.approve} disabled={busy} onClick={() => approve(brief.id)}>{busy ? "Traitement…" : "Approuver"}</button><button className={styles.reject} disabled={busy} onClick={() => { setRefusingId(brief.id); setFeedback(""); }}>Rejeter</button></div>}
               </div>
-            </div>
-          ) : (
-            <div style={{ display: "flex", gap: "1rem" }}>
-              <button 
-                className="nv-btn nv-btn-primary" 
-                onClick={() => handleAccept(brief.id)}
-              >
-                Accepter & Créer Projet
-              </button>
-              <button 
-                className="nv-btn"
-                style={{ background: "rgba(239, 68, 68, 0.1)", color: "#ef4444" }}
-                onClick={() => setRefusingId(brief.id)}
-              >
-                Refuser
-              </button>
-            </div>
-          )}
-        </div>
-      ))}
-      {briefs.length === 0 && (
-        <div className="nv-card" style={{ textAlign: "center", padding: "3rem" }}>
-          <p style={{ color: "var(--nv-text-muted)" }}>Aucun brief en attente.</p>
-        </div>
-      )}
+              {refusingId === brief.id && (
+                <div className={styles.rejectPanel}>
+                  <label className={styles.rejectLabel} htmlFor={`reason-${brief.id}`}>Motif transmis au client</label>
+                  <textarea id={`reason-${brief.id}`} className={styles.rejectInput} value={reason} onChange={(event) => setReason(event.target.value)} placeholder="Expliquez clairement ce qui doit être ajusté ou pourquoi la demande ne peut pas être retenue…" autoFocus />
+                  <div className={styles.rejectActions}><button className={styles.cancel} onClick={() => { setRefusingId(null); setReason(""); }}>Annuler</button><button className={styles.confirm} disabled={busy} onClick={() => reject(brief.id)}>Confirmer le rejet</button></div>
+                </div>
+              )}
+              {brief.refusalReason && <div className={styles.reason}>Motif communiqué : {brief.refusalReason}</div>}
+            </article>
+          );
+        })}
+        {!visible.length && <div className={styles.empty}>Aucune commande dans cette catégorie.</div>}
+      </div>
     </div>
   );
 }

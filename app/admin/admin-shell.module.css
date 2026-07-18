@@ -1,0 +1,38 @@
+.shell { min-height: 100vh; background: #090e19; color: #fff; }
+.sidebar { position: fixed; inset: 0 auto 0 0; z-index: 50; width: 258px; display: flex; flex-direction: column; padding: 27px 18px 18px; border-right: 1px solid rgba(255,255,255,.07); background: #0d1423; }
+.brand { padding: 0 9px; color: #fff; font: 800 20px/1 Outfit,sans-serif; letter-spacing: .13em; }
+.workspace { display: flex; align-items: center; justify-content: space-between; margin: 24px 0 25px; padding: 12px 10px; border: 1px solid rgba(255,255,255,.07); border-radius: 10px; background: rgba(255,255,255,.025); }
+.workspace span { color: #657086; font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.workspace strong { color: #9ebbf5; font-size: 9px; font-weight: 750; }
+.navigation { flex: 1; overflow-y: auto; padding-right: 3px; }
+.navSection { margin-bottom: 22px; }
+.navLabel { padding: 0 10px 8px; color: #566176; font-size: 9px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.navItems { display: grid; gap: 4px; }
+.navLink { position: relative; min-height: 40px; display: flex; align-items: center; gap: 10px; padding: 0 10px; border-radius: 9px; color: #939db0; font-size: 11px; font-weight: 620; }
+.navLink:hover { background: rgba(255,255,255,.04); color: #fff; }
+.navLinkActive { background: rgba(56,111,220,.14); color: #fff; }
+.navLinkActive i { position: absolute; width: 3px; height: 17px; right: -1px; border-radius: 3px 0 0 3px; background: #6798f6; }
+.navCode { width: 25px; height: 25px; display: grid; place-items: center; border-radius: 7px; background: rgba(255,255,255,.045); color: #6f7b91; font-size: 8px; font-weight: 800; letter-spacing: .04em; }
+.navLinkActive .navCode { background: rgba(103,152,246,.16); color: #94b6f8; }
+.account { margin-top: auto; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.07); }
+.accountIdentity { display: flex; align-items: center; gap: 10px; padding: 0 7px 13px; }
+.avatar { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 11px; background: linear-gradient(145deg,#3978eb,#7aa3ef); color: #fff; font-size: 10px; font-weight: 800; }
+.accountText { min-width: 0; display: block; }
+.accountText strong { overflow: hidden; display: block; color: #fff; font-size: 11px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+.accountText small { display: block; margin-top: 4px; color: #687388; font-size: 8px; font-weight: 650; text-transform: capitalize; }
+.logout { width: 100%; min-height: 37px; border: 1px solid rgba(255,255,255,.07); border-radius: 9px; background: transparent; color: #7d8799; cursor: pointer; font: 650 9px/1 Inter,sans-serif; }
+.logout:hover { border-color: rgba(231,94,94,.28); background: rgba(201,58,58,.08); color: #e98080; }
+.main { min-height: 100vh; margin-left: 258px; padding: 34px clamp(24px,4vw,52px) 70px; background: radial-gradient(circle at 88% 0, rgba(36,99,210,.1), transparent 30rem), #090e19; }
+.content { width: min(1240px,100%); margin: 0 auto; }
+
+@media (max-width: 980px) {
+  .sidebar { position: static; width: auto; max-height: none; padding: 18px; }
+  .workspace, .account { display: none; }
+  .navigation { display: flex; gap: 18px; overflow-x: auto; margin-top: 17px; padding-bottom: 4px; }
+  .navSection { flex: 0 0 auto; margin: 0; }
+  .navLabel { display: none; }
+  .navItems { display: flex; }
+  .navLink { flex: 0 0 auto; }
+  .navLinkActive i { width: 18px; height: 3px; inset: auto auto -4px 50%; transform: translateX(-50%); border-radius: 3px 3px 0 0; }
+  .main { margin-left: 0; padding: 28px 20px 55px; }
+}

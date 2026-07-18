@@ -32,7 +32,7 @@ export default async function AdminBlogPage() {
                 <span style={{ fontSize: "0.8rem", color: "var(--nv-accent-violet)", fontWeight: 600, textTransform: "uppercase" }}>
                   {post.category || "Général"}
                 </span>
-                <span className="nv-badge" style={{ background: post.status === "published" ? "rgba(16, 185, 129, 0.1)" : "rgba(245, 158, 11, 0.1)", color: post.status === "published" ? "#10b981" : "#f59e0b" }}>
+                <span className="nv-badge" style={{ background: post.status === "published" ? "rgba(27, 138, 78, 0.12)" : "rgba(230, 92, 0, 0.12)", color: post.status === "published" ? "var(--nv-success)" : "var(--nv-warning)" }}>
                   {post.status === "published" ? "Publié" : "Brouillon"}
                 </span>
               </div>
@@ -53,7 +53,7 @@ export default async function AdminBlogPage() {
                   <button 
                     type="submit" 
                     className="nv-btn" 
-                    style={{ flex: 1, padding: "0.5rem", fontSize: "0.85rem", background: "rgba(239, 68, 68, 0.1)", color: "#ef4444" }}
+                    style={{ flex: 1, padding: "0.5rem", fontSize: "0.85rem", background: "rgba(198, 40, 40, 0.12)", color: "var(--nv-error)" }}
                   >
                     Supprimer
                   </button>

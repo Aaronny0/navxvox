@@ -47,7 +47,7 @@ export default async function AdminQuotesPage({ searchParams }: { searchParams: 
                   <td style={{ padding: "1rem", fontWeight: "bold" }}>{quote.number}</td>
                   <td style={{ padding: "1rem" }}>
                     <div style={{ fontWeight: 600 }}>{new Date(quote.createdAt).toLocaleDateString()}</div>
-                    <div style={{ fontSize: "0.85rem", color: !isValid && quote.status === "pending" ? "#ef4444" : "var(--nv-text-secondary)" }}>
+                    <div style={{ fontSize: "0.85rem", color: !isValid && quote.status === "pending" ? "var(--nv-error)" : "var(--nv-text-secondary)" }}>
                       Valide jusqu'au {new Date(quote.validUntil).toLocaleDateString()}
                     </div>
                   </td>
@@ -58,8 +58,8 @@ export default async function AdminQuotesPage({ searchParams }: { searchParams: 
                   <td style={{ padding: "1rem", fontWeight: 600 }}>{quote.amountTTC.toFixed(2)} €</td>
                   <td style={{ padding: "1rem" }}>
                     <span className="nv-badge" style={{ 
-                      background: quote.status === "accepted" ? "rgba(16, 185, 129, 0.1)" : quote.status === "refused" ? "rgba(239, 68, 68, 0.1)" : "rgba(245, 158, 11, 0.1)", 
-                      color: quote.status === "accepted" ? "#10b981" : quote.status === "refused" ? "#ef4444" : "#f59e0b" 
+                      background: quote.status === "accepted" ? "rgba(27, 138, 78, 0.12)" : quote.status === "refused" ? "rgba(198, 40, 40, 0.12)" : "rgba(230, 92, 0, 0.12)",
+                      color: quote.status === "accepted" ? "var(--nv-success)" : quote.status === "refused" ? "var(--nv-error)" : "var(--nv-warning)"
                     }}>
                       {quote.status === "accepted" ? "Accepté" : quote.status === "refused" ? "Refusé" : "En attente"}
                     </span>
@@ -78,7 +78,7 @@ export default async function AdminQuotesPage({ searchParams }: { searchParams: 
                           </button>
                         </form>
                         <form action={async () => { "use server"; await updateQuoteStatus(quote.id, "accepted"); }}>
-                          <button type="submit" className="nv-btn" style={{ padding: "0.5rem 1rem", fontSize: "0.85rem", background: "rgba(16, 185, 129, 0.1)", color: "#10b981" }}>
+                          <button type="submit" className="nv-btn" style={{ padding: "0.5rem 1rem", fontSize: "0.85rem", background: "rgba(27, 138, 78, 0.12)", color: "var(--nv-success)" }}>
                             Accepter
                           </button>
                         </form>
@@ -88,7 +88,7 @@ export default async function AdminQuotesPage({ searchParams }: { searchParams: 
                       PDF
                     </a>
                     <form action={async () => { "use server"; await deleteQuote(quote.id); }}>
-                      <button type="submit" className="nv-btn" style={{ padding: "0.5rem 1rem", fontSize: "0.85rem", background: "rgba(239, 68, 68, 0.1)", color: "#ef4444" }}>
+                      <button type="submit" className="nv-btn" style={{ padding: "0.5rem 1rem", fontSize: "0.85rem", background: "rgba(198, 40, 40, 0.12)", color: "var(--nv-error)" }}>
                         Suppr.
                       </button>
                     </form>

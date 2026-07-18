@@ -160,7 +160,9 @@ model Brief {
   deadline     String?
   description  String
   files        String   @default("[]") // JSON array of file URLs
-  status       String   @default("received") // received | processing | converted
+  status        String    @default("received") // received | converted | refused
+  refusalReason String?
+  reviewedAt    DateTime?
   createdAt    DateTime @default(now())
 
   client       User     @relation(fields: [clientId], references: [id], onDelete: Cascade)

@@ -35,7 +35,7 @@ export function TeamManager({ members, currentUserId }: { members: Member[], cur
           else { setError(null); setIsAdding(false); }
         }} className="nv-card" style={{ marginBottom: "2rem", border: "1px solid var(--nv-accent-violet)" }}>
           <h3 style={{ marginTop: 0, marginBottom: "1.5rem" }}>Nouveau Membre</h3>
-          {error && <p style={{ color: "#ef4444", marginBottom: "1rem" }}>{error}</p>}
+          {error && <p style={{ color: "var(--nv-error)", marginBottom: "1rem" }}>{error}</p>}
           
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1rem" }}>
             <div><label className="nv-label">Prénom</label><input type="text" name="firstName" className="nv-input" required /></div>
@@ -75,12 +75,12 @@ export function TeamManager({ members, currentUserId }: { members: Member[], cur
                 <td style={{ padding: "1rem", fontWeight: 600 }}>{member.firstName} {member.lastName}</td>
                 <td style={{ padding: "1rem", color: "var(--nv-text-secondary)" }}>{member.email}</td>
                 <td style={{ padding: "1rem" }}>
-                  <span className="nv-badge" style={{ background: member.role === "SUPER_ADMIN" ? "rgba(139, 92, 246, 0.1)" : "rgba(255,255,255,0.05)", color: member.role === "SUPER_ADMIN" ? "#8b5cf6" : "var(--nv-text-primary)" }}>
+                  <span className="nv-badge" style={{ background: member.role === "SUPER_ADMIN" ? "rgba(26, 111, 212, 0.12)" : "rgba(255,255,255,0.05)", color: member.role === "SUPER_ADMIN" ? "var(--nv-accent-violet)" : "var(--nv-text-primary)" }}>
                     {member.role}
                   </span>
                 </td>
                 <td style={{ padding: "1rem" }}>
-                  <span className="nv-badge" style={{ background: member.isActive ? "rgba(16, 185, 129, 0.1)" : "rgba(239, 68, 68, 0.1)", color: member.isActive ? "#10b981" : "#ef4444" }}>
+                  <span className="nv-badge" style={{ background: member.isActive ? "rgba(27, 138, 78, 0.12)" : "rgba(198, 40, 40, 0.12)", color: member.isActive ? "var(--nv-success)" : "var(--nv-error)" }}>
                     {member.isActive ? "Actif" : "Inactif"}
                   </span>
                 </td>

@@ -79,6 +79,9 @@ export default function Home() {
             <Link href="/contact" className="nv-btn nv-btn-primary">
               Démarrer un projet →
             </Link>
+            <Link href="/client/login" className="nv-btn nv-btn-ghost">
+              Espace Client 🔐
+            </Link>
             <Link href="/portfolio" className="nv-btn nv-btn-ghost">
               Voir nos réalisations
             </Link>
@@ -223,7 +226,7 @@ export default function Home() {
       <section
         style={{
           padding: "6rem 0",
-          background: "linear-gradient(135deg, rgba(139,92,246,0.12) 0%, rgba(34,211,238,0.06) 100%)",
+          background: "linear-gradient(135deg, rgba(26,111,212,0.14) 0%, rgba(0,200,224,0.07) 100%)",
           borderTop: "1px solid var(--nv-border-light)",
           textAlign: "center",
           position: "relative",

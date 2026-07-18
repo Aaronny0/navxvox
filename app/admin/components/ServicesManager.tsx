@@ -85,7 +85,7 @@ export function ServicesManager({ services }: { services: Service[] }) {
               <>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "1rem" }}>
                   <div style={{ fontSize: "2rem" }}>{service.icon}</div>
-                  {!service.isActive && <span className="nv-badge" style={{ background: "rgba(239, 68, 68, 0.1)", color: "#ef4444" }}>Inactif</span>}
+                  {!service.isActive && <span className="nv-badge" style={{ background: "rgba(198, 40, 40, 0.12)", color: "var(--nv-error)" }}>Inactif</span>}
                 </div>
                 <h3 style={{ fontSize: "1.25rem", margin: "0 0 0.5rem" }}>{service.title}</h3>
                 <p style={{ color: "var(--nv-text-secondary)", fontSize: "0.9rem", flex: 1 }}>{service.shortDesc}</p>
@@ -104,7 +104,7 @@ export function ServicesManager({ services }: { services: Service[] }) {
                   <button 
                     onClick={async () => { if(confirm("Supprimer ce service ?")) await deleteService(service.id); }} 
                     className="nv-btn" 
-                    style={{ flex: 1, padding: "0.5rem", fontSize: "0.85rem", background: "rgba(239, 68, 68, 0.1)", color: "#ef4444" }}
+                    style={{ flex: 1, padding: "0.5rem", fontSize: "0.85rem", background: "rgba(198, 40, 40, 0.12)", color: "var(--nv-error)" }}
                   >
                     Supprimer
                   </button>

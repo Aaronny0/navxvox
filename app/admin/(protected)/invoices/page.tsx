@@ -40,7 +40,7 @@ export default async function AdminInvoicesPage() {
                   <td style={{ padding: "1rem" }}>
                     <div style={{ fontWeight: 600 }}>{new Date(invoice.createdAt).toLocaleDateString()}</div>
                     {invoice.dueDate && (
-                      <div style={{ fontSize: "0.85rem", color: isOverdue ? "#ef4444" : "var(--nv-text-secondary)", fontWeight: isOverdue ? "bold" : "normal" }}>
+                      <div style={{ fontSize: "0.85rem", color: isOverdue ? "var(--nv-error)" : "var(--nv-text-secondary)", fontWeight: isOverdue ? "bold" : "normal" }}>
                         Échéance: {new Date(invoice.dueDate).toLocaleDateString()}
                       </div>
                     )}
@@ -53,8 +53,8 @@ export default async function AdminInvoicesPage() {
                   <td style={{ padding: "1rem" }}>
                     <form action={async () => { "use server"; await updateInvoiceStatus(invoice.id, invoice.status === "paid" ? "sent" : "paid"); }}>
                       <button type="submit" className="nv-badge" style={{ 
-                        background: invoice.status === "paid" ? "rgba(16, 185, 129, 0.1)" : isOverdue ? "rgba(239, 68, 68, 0.1)" : "rgba(245, 158, 11, 0.1)", 
-                        color: invoice.status === "paid" ? "#10b981" : isOverdue ? "#ef4444" : "#f59e0b",
+                        background: invoice.status === "paid" ? "rgba(27, 138, 78, 0.12)" : isOverdue ? "rgba(198, 40, 40, 0.12)" : "rgba(230, 92, 0, 0.12)",
+                        color: invoice.status === "paid" ? "var(--nv-success)" : isOverdue ? "var(--nv-error)" : "var(--nv-warning)",
                         border: "none", cursor: "pointer"
                       }}>
                         {invoice.status === "paid" ? "Payée" : isOverdue ? "En retard" : "Envoyée"}
@@ -73,7 +73,7 @@ export default async function AdminInvoicesPage() {
                       PDF
                     </a>
                     <form action={async () => { "use server"; await deleteInvoice(invoice.id); }}>
-                      <button type="submit" className="nv-btn" style={{ padding: "0.5rem 1rem", fontSize: "0.85rem", background: "rgba(239, 68, 68, 0.1)", color: "#ef4444" }}>
+                      <button type="submit" className="nv-btn" style={{ padding: "0.5rem 1rem", fontSize: "0.85rem", background: "rgba(198, 40, 40, 0.12)", color: "var(--nv-error)" }}>
                         Suppr.
                       </button>
                     </form>

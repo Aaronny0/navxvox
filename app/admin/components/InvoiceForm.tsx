@@ -103,7 +103,7 @@ export function InvoiceForm({ clients }: { clients: Client[] }) {
               </div>
               <div style={{ width: "40px", display: "flex", flexDirection: "column", justifyContent: index === 0 ? "flex-end" : "center", height: index === 0 ? "58px" : "auto" }}>
                 {lines.length > 1 && (
-                  <button type="button" onClick={() => removeLine(line.id)} style={{ background: "none", border: "none", color: "#ef4444", cursor: "pointer", fontSize: "1.25rem" }}>
+                  <button type="button" onClick={() => removeLine(line.id)} style={{ background: "none", border: "none", color: "var(--nv-error)", cursor: "pointer", fontSize: "1.25rem" }}>
                     ×
                   </button>
                 )}

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import ContactForm from "@/app/components/ContactForm";
-import SectionHeading from "@/app/components/SectionHeading";
 import ScrollReveal from "@/app/components/ScrollReveal";
 
 export const metadata: Metadata = {
@@ -10,10 +9,10 @@ export const metadata: Metadata = {
 };
 
 const contactInfo = [
-  { icon: "📧", label: "Email", value: "hello@novavox.fr", href: "mailto:hello@novavox.fr" },
-  { icon: "📞", label: "Téléphone", value: "+33 1 23 45 67 89", href: "tel:+33123456789" },
-  { icon: "📍", label: "Adresse", value: "Paris, France", href: null },
-  { icon: "🕐", label: "Horaires", value: "Lun–Ven, 9h–18h", href: null },
+  { icon: "📧", label: "Email", value: "novavox30@gmail.com", href: "mailto:novavox30@gmail.com" },
+  { icon: "📞", label: "Téléphone", value: "01 62 08 91 61", href: "tel:0162089161" },
+  { icon: "📍", label: "Localisation", value: "Cotonou, Bénin", href: null },
+  { icon: "🕐", label: "Horaires", value: "9h–17h", href: null },
 ];
 
 const reasons = [
@@ -56,7 +55,7 @@ export default function ContactPage() {
                 <div
                   style={{
                     padding: "1.25rem",
-                    background: "rgba(139,92,246,0.05)",
+                    background: "rgba(26,111,212,0.06)",
                     border: "1px solid var(--nv-border-light)",
                     borderRadius: "var(--nv-radius-md)",
                     display: "flex",
@@ -127,7 +126,7 @@ export default function ContactPage() {
                               width: "36px",
                               height: "36px",
                               borderRadius: "8px",
-                              background: "rgba(139,92,246,0.1)",
+                              background: "rgba(26,111,212,0.12)",
                               display: "flex",
                               alignItems: "center",
                               justifyContent: "center",
@@ -164,7 +163,7 @@ export default function ContactPage() {
                       Suivez-nous
                     </h3>
                     <div style={{ display: "flex", gap: "0.75rem" }}>
-                      {["LinkedIn", "Twitter", "Instagram", "GitHub"].map((s) => (
+                      {["TikTok", "Instagram", "Facebook"].map((s) => (
                         <a
                           key={s}
                           href="#"

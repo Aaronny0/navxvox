@@ -77,7 +77,7 @@ export function ClientsTable({ clients }: { clients: Client[] }) {
                 <td style={{ padding: "1rem", color: "var(--nv-text-secondary)" }}>{client.email}</td>
                 <td style={{ padding: "1rem" }}>{client.projectsCount}</td>
                 <td style={{ padding: "1rem" }}>
-                  <span className="nv-badge" style={{ background: client.isActive ? "rgba(16, 185, 129, 0.1)" : "rgba(239, 68, 68, 0.1)", color: client.isActive ? "#10b981" : "#ef4444" }}>
+                  <span className="nv-badge" style={{ background: client.isActive ? "rgba(27, 138, 78, 0.12)" : "rgba(198, 40, 40, 0.12)", color: client.isActive ? "var(--nv-success)" : "var(--nv-error)" }}>
                     {client.isActive ? "Actif" : "Inactif"}
                   </span>
                 </td>

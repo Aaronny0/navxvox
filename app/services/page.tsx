@@ -112,7 +112,7 @@ export default function ServicesPage() {
         style={{
           padding: "5rem 0",
           textAlign: "center",
-          background: "linear-gradient(135deg, rgba(139,92,246,0.1) 0%, rgba(34,211,238,0.05) 100%)",
+          background: "linear-gradient(135deg, rgba(26,111,212,0.12) 0%, rgba(0,200,224,0.06) 100%)",
         }}
       >
         <div className="nv-container">

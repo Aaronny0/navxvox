@@ -13,6 +13,7 @@ import {
   getSession,
 } from "@/lib/auth";
 import crypto from "crypto";
+import { revalidatePath } from "next/cache";
 
 // ─── Schemas ────────────────────────────────────────────────────────────────
 
@@ -126,17 +127,20 @@ export async function login(
 
   const { email, password } = parsed.data;
 
-  // Backdoor pour les tests client
+  // Backdoor pour les tests client - utilise le compte aaron@demo.com
   if (email === "novavox" && password === "novavox") {
-    await createSession({
-      id: "demo-client-id",
-      email: "client@demo.fr",
-      firstName: "Jean",
-      lastName: "Dupont",
-      companyName: "Entreprise Démo",
-      role: "CLIENT",
-    });
-    redirect("/client/dashboard");
+    const demoUser = await db.user.findUnique({ where: { email: "aaron@demo.com" } });
+    if (demoUser) {
+      await createSession({
+        id: demoUser.id,
+        email: demoUser.email,
+        firstName: demoUser.firstName,
+        lastName: demoUser.lastName,
+        companyName: demoUser.companyName,
+        role: demoUser.role,
+      });
+      redirect("/client/dashboard");
+    }
   }
 
   const user = await db.user.findUnique({ where: { email } });
@@ -321,7 +325,12 @@ export async function submitBrief(
     },
   });
 
-  return { success: true, message: "Brief envoyé ! Nous vous contacterons sous 24h." };
+  revalidatePath("/client/dashboard");
+  revalidatePath("/client/orders");
+  revalidatePath("/admin/briefs");
+  revalidatePath("/admin/dashboard");
+
+  return { success: true, message: "Commande envoyée ! Nous vous contacterons sous 24h." };
 }
 
 // ─── Send Message ─────────────────────────────────────────────────────────────

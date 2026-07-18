@@ -15,7 +15,7 @@ import {
   Line,
 } from "recharts";
 
-const COLORS = ["#8b5cf6", "#06b6d4", "#f59e0b", "#ef4444", "#10b981"];
+const COLORS = ["#1a6fd4", "#00c8e0", "#e65c00", "#c62828", "#1b8a4e"];
 
 export function ProjectStatusChart({ data }: { data: { name: string; value: number }[] }) {
   return (

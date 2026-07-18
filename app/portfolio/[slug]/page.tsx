@@ -78,7 +78,7 @@ export default async function ProjectDetailPage({
             style={{
               height: "400px",
               borderRadius: "var(--nv-radius-lg)",
-              background: `linear-gradient(135deg, rgba(139,92,246,0.15) 0%, rgba(34,211,238,0.08) 50%, rgba(5,5,8,0.9) 100%)`,
+              background: `linear-gradient(135deg, rgba(26,111,212,0.16) 0%, rgba(0,200,224,0.08) 50%, rgba(10,14,26,0.9) 100%)`,
               border: "1px solid var(--nv-border-light)",
               display: "flex",
               alignItems: "center",
@@ -135,8 +135,8 @@ export default async function ProjectDetailPage({
                           key={r}
                           style={{
                             padding: "1rem 1.5rem",
-                            background: "rgba(139,92,246,0.08)",
-                            border: "1px solid rgba(139,92,246,0.2)",
+                            background: "rgba(26,111,212,0.1)",
+                            border: "1px solid rgba(26,111,212,0.24)",
                             borderRadius: "var(--nv-radius-md)",
                             fontFamily: "Outfit, sans-serif",
                             fontWeight: 600,

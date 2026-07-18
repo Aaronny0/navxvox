@@ -28,7 +28,7 @@ function ResetPasswordForm() {
   if (!token) {
     return (
       <div style={{ textAlign: "center" }}>
-        <p style={{ color: "#ef4444" }}>Lien invalide ou expiré.</p>
+        <p style={{ color: "var(--nv-error)" }}>Lien invalide ou expiré.</p>
         <Link href="/client/forgot-password" style={{ color: "var(--nv-accent-violet)", textDecoration: "none" }}>
           Demander un nouveau lien
         </Link>
@@ -51,17 +51,17 @@ function ResetPasswordForm() {
         <div>
           <label htmlFor="password" className="nv-label">Nouveau mot de passe</label>
           <input type="password" id="password" name="password" className="nv-input" required minLength={8} />
-          {state?.errors?.password && <span style={{ color: "#ef4444", fontSize: "0.8rem", marginTop: "0.25rem", display: "block" }}>{state.errors.password[0]}</span>}
+          {state?.errors?.password && <span style={{ color: "var(--nv-error)", fontSize: "0.8rem", marginTop: "0.25rem", display: "block" }}>{state.errors.password[0]}</span>}
         </div>
 
         <div>
           <label htmlFor="confirm" className="nv-label">Confirmer le mot de passe</label>
           <input type="password" id="confirm" name="confirm" className="nv-input" required minLength={8} />
-          {state?.errors?.confirm && <span style={{ color: "#ef4444", fontSize: "0.8rem", marginTop: "0.25rem", display: "block" }}>{state.errors.confirm[0]}</span>}
+          {state?.errors?.confirm && <span style={{ color: "var(--nv-error)", fontSize: "0.8rem", marginTop: "0.25rem", display: "block" }}>{state.errors.confirm[0]}</span>}
         </div>
 
         {state?.message && !state?.success && (
-          <div style={{ padding: "1rem", background: "rgba(239,68,68,0.1)", color: "#ef4444", borderRadius: "var(--nv-radius-md)", fontSize: "0.85rem", textAlign: "center" }}>
+          <div style={{ padding: "1rem", background: "rgba(198,40,40,0.12)", color: "var(--nv-error)", borderRadius: "var(--nv-radius-md)", fontSize: "0.85rem", textAlign: "center" }}>
             {state.message}
           </div>
         )}

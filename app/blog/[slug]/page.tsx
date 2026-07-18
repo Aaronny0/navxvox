@@ -116,7 +116,7 @@ export default async function BlogPostPage({
             style={{
               height: "300px",
               borderRadius: "var(--nv-radius-lg)",
-              background: "linear-gradient(135deg, rgba(139,92,246,0.15) 0%, rgba(34,211,238,0.08) 100%)",
+              background: "linear-gradient(135deg, rgba(26,111,212,0.16) 0%, rgba(0,200,224,0.08) 100%)",
               border: "1px solid var(--nv-border-light)",
               display: "flex",
               alignItems: "center",

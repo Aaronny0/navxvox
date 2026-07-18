@@ -28,22 +28,12 @@ const footerLinks = {
 
 const socials = [
   {
-    id: "linkedin",
-    label: "LinkedIn",
+    id: "tiktok",
+    label: "TikTok",
     href: "#",
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
-      </svg>
-    ),
-  },
-  {
-    id: "twitter",
-    label: "Twitter / X",
-    href: "#",
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+        <path d="M16.6 5.82A4.85 4.85 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 1 1-2.59-2.59c.27 0 .53.04.78.12V9.78a5.7 5.7 0 1 0 4.9 5.62V9.11A7.9 7.9 0 0 0 20.16 10V6.92a4.9 4.9 0 0 1-3.56-1.1Z" />
       </svg>
     ),
   },
@@ -58,12 +48,12 @@ const socials = [
     ),
   },
   {
-    id: "github",
-    label: "GitHub",
+    id: "facebook",
+    label: "Facebook",
     href: "#",
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33c.85 0 1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z" />
+        <path d="M13.5 22v-9h3l.45-3.5H13.5V7.27c0-1.01.28-1.7 1.73-1.7H17V2.44A23.6 23.6 0 0 0 14.42 2C11.86 2 10 3.56 10 6.43V9.5H7V13h3v9h3.5Z" />
       </svg>
     ),
   },
@@ -85,7 +75,7 @@ export default function Footer() {
       <div
         style={{
           background:
-            "linear-gradient(135deg, rgba(139,92,246,0.15) 0%, rgba(34,211,238,0.08) 100%)",
+            "linear-gradient(135deg, rgba(26,111,212,0.16) 0%, rgba(0,200,224,0.08) 100%)",
           borderBottom: "1px solid var(--nv-border-light)",
           padding: "3rem 0",
         }}
@@ -200,7 +190,7 @@ export default function Footer() {
                     const el = e.currentTarget as HTMLElement;
                     el.style.borderColor = "var(--nv-accent-violet)";
                     el.style.color = "var(--nv-accent-violet)";
-                    el.style.background = "rgba(139,92,246,0.1)";
+                    el.style.background = "rgba(26,111,212,0.12)";
                   }}
                   onMouseLeave={(e) => {
                     const el = e.currentTarget as HTMLElement;
@@ -312,10 +302,10 @@ export default function Footer() {
             </h4>
             <div style={{ display: "flex", flexDirection: "column", gap: "0.875rem" }}>
               {[
-                { icon: "📧", text: "hello@novavox.fr", href: "mailto:hello@novavox.fr" },
-                { icon: "📞", text: "+33 1 23 45 67 89", href: "tel:+33123456789" },
-                { icon: "📍", text: "Paris, France", href: null },
-                { icon: "🕐", text: "Lun–Ven, 9h–18h", href: null },
+                { icon: "📧", text: "novavox30@gmail.com", href: "mailto:novavox30@gmail.com" },
+                { icon: "📞", text: "01 62 08 91 61", href: "tel:0162089161" },
+                { icon: "📍", text: "Cotonou, Bénin", href: null },
+                { icon: "🕐", text: "9h–17h", href: null },
               ].map((item, i) => (
                 <div key={i} style={{ display: "flex", alignItems: "center", gap: "0.625rem" }}>
                   <span style={{ fontSize: "0.875rem" }}>{item.icon}</span>
@@ -362,7 +352,7 @@ export default function Footer() {
         >
           <p style={{ fontSize: "0.8rem", color: "var(--nv-text-muted)", margin: 0 }}>
             © {year} NOVAVOX. Tous droits réservés. Conçu avec{" "}
-            <span style={{ color: "var(--nv-accent-violet)" }}>♥</span> à Paris.
+            <span style={{ color: "var(--nv-accent-violet)" }}>♥</span> à Cotonou.
           </p>
           <div style={{ display: "flex", gap: "1.5rem" }}>
             {footerLinks.legal.map((link) => (

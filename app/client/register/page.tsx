@@ -39,26 +39,26 @@ export default function RegisterPage() {
             <div>
               <label htmlFor="firstName" className="nv-label">Prénom *</label>
               <input type="text" id="firstName" name="firstName" className="nv-input" required />
-              {state?.errors?.firstName && <span style={{ color: "#ef4444", fontSize: "0.8rem", marginTop: "0.25rem", display: "block" }}>{state.errors.firstName[0]}</span>}
+              {state?.errors?.firstName && <span style={{ color: "var(--nv-error)", fontSize: "0.8rem", marginTop: "0.25rem", display: "block" }}>{state.errors.firstName[0]}</span>}
             </div>
             <div>
               <label htmlFor="lastName" className="nv-label">Nom *</label>
               <input type="text" id="lastName" name="lastName" className="nv-input" required />
-              {state?.errors?.lastName && <span style={{ color: "#ef4444", fontSize: "0.8rem", marginTop: "0.25rem", display: "block" }}>{state.errors.lastName[0]}</span>}
+              {state?.errors?.lastName && <span style={{ color: "var(--nv-error)", fontSize: "0.8rem", marginTop: "0.25rem", display: "block" }}>{state.errors.lastName[0]}</span>}
             </div>
           </div>
 
           <div>
             <label htmlFor="companyName" className="nv-label">Nom de l'entreprise *</label>
             <input type="text" id="companyName" name="companyName" className="nv-input" required />
-            {state?.errors?.companyName && <span style={{ color: "#ef4444", fontSize: "0.8rem", marginTop: "0.25rem", display: "block" }}>{state.errors.companyName[0]}</span>}
+            {state?.errors?.companyName && <span style={{ color: "var(--nv-error)", fontSize: "0.8rem", marginTop: "0.25rem", display: "block" }}>{state.errors.companyName[0]}</span>}
           </div>
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
             <div>
               <label htmlFor="email" className="nv-label">Email professionnel *</label>
               <input type="email" id="email" name="email" className="nv-input" required />
-              {state?.errors?.email && <span style={{ color: "#ef4444", fontSize: "0.8rem", marginTop: "0.25rem", display: "block" }}>{state.errors.email[0]}</span>}
+              {state?.errors?.email && <span style={{ color: "var(--nv-error)", fontSize: "0.8rem", marginTop: "0.25rem", display: "block" }}>{state.errors.email[0]}</span>}
             </div>
             <div>
               <label htmlFor="phone" className="nv-label">Téléphone</label>
@@ -70,7 +70,7 @@ export default function RegisterPage() {
             <label htmlFor="password" className="nv-label">Mot de passe *</label>
             <input type="password" id="password" name="password" className="nv-input" required />
             {state?.errors?.password && (
-              <ul style={{ color: "#ef4444", fontSize: "0.8rem", marginTop: "0.5rem", paddingLeft: "1.2rem" }}>
+              <ul style={{ color: "var(--nv-error)", fontSize: "0.8rem", marginTop: "0.5rem", paddingLeft: "1.2rem" }}>
                 {state.errors.password.map(e => <li key={e}>{e}</li>)}
               </ul>
             )}

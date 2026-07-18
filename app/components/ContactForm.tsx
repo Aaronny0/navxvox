@@ -57,9 +57,9 @@ export default function ContactForm() {
         style={{
           textAlign: "center",
           padding: "3rem 2rem",
-          background: "rgba(139,92,246,0.08)",
+          background: "rgba(26,111,212,0.1)",
           borderRadius: "var(--nv-radius-lg)",
-          border: "1px solid rgba(139,92,246,0.2)",
+          border: "1px solid rgba(26,111,212,0.24)",
         }}
       >
         <span style={{ fontSize: "3rem", display: "block", marginBottom: "1rem" }}>✅</span>
@@ -99,17 +99,17 @@ export default function ContactForm() {
         <div>
           <label htmlFor="firstName" className="nv-label">Prénom *</label>
           <input id="firstName" name="firstName" type="text" className="nv-input" style={inputStyle} placeholder="Jean" />
-          {errors.firstName && <span style={{ color: "#ef4444", fontSize: "0.75rem" }}>{errors.firstName}</span>}
+          {errors.firstName && <span style={{ color: "var(--nv-error)", fontSize: "0.75rem" }}>{errors.firstName}</span>}
         </div>
         <div>
           <label htmlFor="lastName" className="nv-label">Nom *</label>
           <input id="lastName" name="lastName" type="text" className="nv-input" style={inputStyle} placeholder="Dupont" />
-          {errors.lastName && <span style={{ color: "#ef4444", fontSize: "0.75rem" }}>{errors.lastName}</span>}
+          {errors.lastName && <span style={{ color: "var(--nv-error)", fontSize: "0.75rem" }}>{errors.lastName}</span>}
         </div>
         <div>
           <label htmlFor="email" className="nv-label">Email *</label>
           <input id="email" name="email" type="email" className="nv-input" style={inputStyle} placeholder="jean@exemple.fr" />
-          {errors.email && <span style={{ color: "#ef4444", fontSize: "0.75rem" }}>{errors.email}</span>}
+          {errors.email && <span style={{ color: "var(--nv-error)", fontSize: "0.75rem" }}>{errors.email}</span>}
         </div>
         <div>
           <label htmlFor="phone" className="nv-label">Téléphone</label>
@@ -145,7 +145,7 @@ export default function ContactForm() {
           style={{ ...inputStyle, resize: "vertical" }}
           placeholder="Décrivez votre projet, vos besoins, vos délais…"
         />
-        {errors.message && <span style={{ color: "#ef4444", fontSize: "0.75rem" }}>{errors.message}</span>}
+        {errors.message && <span style={{ color: "var(--nv-error)", fontSize: "0.75rem" }}>{errors.message}</span>}
       </div>
 
       <button
@@ -158,7 +158,7 @@ export default function ContactForm() {
       </button>
 
       {status === "error" && (
-        <p style={{ color: "#ef4444", fontSize: "0.85rem", marginTop: "1rem", textAlign: "center" }}>
+        <p style={{ color: "var(--nv-error)", fontSize: "0.85rem", marginTop: "1rem", textAlign: "center" }}>
           Une erreur est survenue. Veuillez réessayer.
         </p>
       )}

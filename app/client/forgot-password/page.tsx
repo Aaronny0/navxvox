@@ -40,7 +40,7 @@ export default function ForgotPasswordPage() {
               required
             />
             {state?.errors?.email && (
-              <span style={{ color: "#ef4444", fontSize: "0.8rem", marginTop: "0.25rem", display: "block" }}>
+              <span style={{ color: "var(--nv-error)", fontSize: "0.8rem", marginTop: "0.25rem", display: "block" }}>
                 {state.errors.email[0]}
               </span>
             )}
@@ -57,7 +57,7 @@ export default function ForgotPasswordPage() {
         </form>
 
         {state?.success && (
-          <div style={{ marginTop: "1.5rem", padding: "1rem", background: "rgba(16, 185, 129, 0.1)", color: "#10b981", borderRadius: "8px", fontSize: "0.9rem", textAlign: "center" }}>
+          <div style={{ marginTop: "1.5rem", padding: "1rem", background: "rgba(27, 138, 78, 0.12)", color: "var(--nv-success)", borderRadius: "8px", fontSize: "0.9rem", textAlign: "center" }}>
             {state.message}
           </div>
         )}

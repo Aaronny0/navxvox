@@ -662,10 +662,10 @@ export const teamMembers: TeamMember[] = [
    ============================================================ */
 
 export const stats: Stat[] = [
-  { value: 120, suffix: "+", label: "Projets livrés", icon: "🚀" },
+  { value: 20, suffix: "+", label: "Projets livrés", icon: "🚀" },
   { value: 98, suffix: "%", label: "Clients satisfaits", icon: "⭐" },
-  { value: 5, suffix: " ans", label: "D'expertise", icon: "🏆" },
-  { value: 50, suffix: "+", label: "Partenaires actifs", icon: "🤝" },
+  { value: 3, suffix: " ans", label: "D'expertise", icon: "🏆" },
+  { value: 5, suffix: "", label: "Partenaires actifs", icon: "🤝" },
 ];
 
 /* ============================================================
