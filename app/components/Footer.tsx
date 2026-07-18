@@ -13,12 +13,12 @@ const footerLinks = {
     { href: "/contact", label: "Contact" },
   ],
   services: [
-    { href: "/services#creation-site-web", label: "Création de Site Web" },
-    { href: "/services#application-web", label: "Application Web" },
-    { href: "/services#design-ux-ui", label: "Design UX/UI" },
-    { href: "/services#e-commerce", label: "E-commerce" },
-    { href: "/services#seo", label: "SEO & Visibilité" },
-    { href: "/services#maintenance", label: "Maintenance" },
+    { href: "/services#communication-strategie", label: "Communication & Stratégie" },
+    { href: "/services#branding-identite-visuelle", label: "Branding & Identité" },
+    { href: "/services#creation-graphique-contenus", label: "Création Graphique" },
+    { href: "/services#sites-web-e-commerce", label: "Sites Web & E-commerce" },
+    { href: "/services#applications-solutions-digitales", label: "Applications Digitales" },
+    { href: "/services#securite-informatique", label: "Sécurité Informatique" },
   ],
   legal: [
     { href: "#", label: "Mentions légales" },
@@ -158,7 +158,7 @@ export default function Footer() {
               </span>
             </div>
             <p style={{ fontSize: "0.875rem", color: "var(--nv-text-muted)", lineHeight: 1.7, margin: 0 }}>
-              Agence web premium spécialisée en création de sites, applications web et design UX/UI.
+              L&apos;impact commence ici. Communication, identité visuelle, solutions digitales et sécurité informatique.
             </p>
             {/* Socials */}
             <div style={{ display: "flex", gap: "0.75rem", marginTop: "1.5rem" }}>

@@ -5,7 +5,7 @@ import ScrollReveal from "@/app/components/ScrollReveal";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Contactez NOVAVOX pour discuter de votre projet web. Premier échange gratuit et sans engagement. Devis sous 48h.",
+    "Contactez NOVAVOX pour discuter de votre projet de communication, de branding, de création digitale ou de sécurité informatique.",
 };
 
 const contactInfo = [

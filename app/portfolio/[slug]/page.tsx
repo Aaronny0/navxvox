@@ -71,32 +71,25 @@ export default async function ProjectDetailPage({
         </div>
       </section>
 
-      {/* Image placeholder */}
+      {/* Project preview */}
       <section style={{ paddingBottom: "3rem" }}>
         <div className="nv-container">
           <div
             style={{
-              height: "400px",
+              height: "clamp(260px, 45vw, 560px)",
               borderRadius: "var(--nv-radius-lg)",
-              background: `linear-gradient(135deg, rgba(13,61,102,0.48) 0%, rgba(46,196,182,0.12) 50%, rgba(6,26,43,0.94) 100%)`,
+              backgroundImage: `linear-gradient(180deg, rgba(6,26,43,0.02) 55%, rgba(6,26,43,0.72) 100%), url("${project.image}")`,
+              backgroundSize: "cover",
+              backgroundPosition: "top center",
               border: "1px solid var(--nv-border-light)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               overflow: "hidden",
             }}
-          >
-            <span
-              style={{
-                fontSize: "6rem",
-                opacity: 0.15,
-                fontFamily: "Outfit, sans-serif",
-                fontWeight: 900,
-              }}
-            >
-              {project.title}
-            </span>
-          </div>
+            role="img"
+            aria-label={`Aperçu du projet ${project.title}`}
+          />
         </div>
       </section>
 
@@ -166,7 +159,7 @@ export default async function ProjectDetailPage({
                 {[
                   { label: "Client", value: project.client },
                   { label: "Catégorie", value: project.category },
-                  { label: "Année", value: String(project.year) },
+                  ...(project.year ? [{ label: "Année", value: String(project.year) }] : []),
                 ].map((item) => (
                   <div key={item.label}>
                     <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--nv-text-muted)", textTransform: "uppercase" as const, letterSpacing: "0.08em", fontFamily: "Outfit, sans-serif" }}>
@@ -179,7 +172,7 @@ export default async function ProjectDetailPage({
                 ))}
                 <div>
                   <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--nv-text-muted)", textTransform: "uppercase" as const, letterSpacing: "0.08em", fontFamily: "Outfit, sans-serif" }}>
-                    Technologies
+                    Fonctionnalités clés
                   </span>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: "0.375rem", marginTop: "0.5rem" }}>
                     {project.technologies.map((t) => (

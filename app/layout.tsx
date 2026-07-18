@@ -18,13 +18,17 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   metadataBase: new URL("https://novavox.fr"),
   title: {
-    default: "NOVAVOX — Agence Web Premium | Sites & Applications Sur Mesure",
+    default: "NOVAVOX — L'impact commence ici.",
     template: "%s | NOVAVOX",
   },
   description:
-    "NOVAVOX est une agence web premium spécialisée dans la création de sites vitrine, applications web et e-commerce. Design exceptionnel, performances optimales, résultats mesurables.",
+    "NOVAVOX — L'impact commence ici. Nous accompagnons les entreprises et les particuliers avec des solutions de communication créatives et digitales sur mesure.",
   keywords: [
-    "agence web",
+    "agence de communication",
+    "branding",
+    "identité visuelle",
+    "création graphique",
+    "sécurité informatique",
     "création site web",
     "développement web",
     "design UX/UI",
@@ -40,22 +44,22 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     url: "https://novavox.fr",
     siteName: "NOVAVOX",
-    title: "NOVAVOX — Agence Web Premium | Sites & Applications Sur Mesure",
+    title: "NOVAVOX — L'impact commence ici.",
     description:
-      "Design exceptionnel, performances optimales, résultats mesurables. Votre ambition mérite la meilleure agence web.",
+      "Des solutions de communication créatives et digitales pour valoriser votre image et renforcer votre impact.",
     images: [
       {
         url: "/brand/novavox-logo.jpeg",
         width: 1254,
         height: 1254,
-        alt: "NOVAVOX — Agence Web Premium",
+        alt: "NOVAVOX — L'impact commence ici.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "NOVAVOX — Agence Web Premium",
-    description: "Sites vitrine, applications web et e-commerce sur mesure.",
+    title: "NOVAVOX — L'impact commence ici.",
+    description: "Communication créative et solutions digitales sur mesure.",
     images: ["/brand/novavox-logo.jpeg"],
   },
   robots: {

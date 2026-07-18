@@ -9,7 +9,7 @@ import ScrollReveal from "@/app/components/ScrollReveal";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Découvrez nos services : création de sites web, applications web, design UX/UI, e-commerce, SEO et maintenance. Solutions digitales premium sur mesure.",
+    "Communication, branding, identité visuelle, création graphique, sites web, applications et sécurité informatique : découvrez l'expertise complète de NOVAVOX.",
 };
 
 export default function ServicesPage() {
@@ -32,7 +32,7 @@ export default function ServicesPage() {
             Des solutions <span className="nv-text-gradient">sur mesure</span>
           </h1>
           <p style={{ fontSize: "1.1rem", color: "var(--nv-text-secondary)", maxWidth: "600px", margin: "0 auto" }}>
-            De la conception à la mise en ligne, chaque projet bénéficie de notre expertise complète en développement web et design.
+            De votre image de marque à vos outils digitaux, nous réunissons communication, création, technologie et sécurité au service de votre impact.
           </p>
         </div>
       </section>
@@ -49,7 +49,7 @@ export default function ServicesPage() {
           >
             {services.map((service, i) => (
               <ScrollReveal key={service.id} delay={i * 80}>
-                <div>
+                <div id={service.slug} style={{ scrollMarginTop: "7rem" }}>
                   <ServiceCard service={service} />
                   {/* Features list */}
                   <div

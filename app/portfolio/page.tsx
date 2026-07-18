@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
+import { projects } from "@/lib/data";
 import { graphicCreations } from "@/lib/creations";
 import GraphicGallery from "@/app/components/GraphicGallery";
+import ProjectCard from "@/app/components/ProjectCard";
+import SectionHeading from "@/app/components/SectionHeading";
+import ScrollReveal from "@/app/components/ScrollReveal";
 
 export const metadata: Metadata = {
-  title: "Réalisations graphiques",
+  title: "Nos réalisations",
   description:
-    "Découvrez les affiches, packagings, identités visuelles et supports de communication réalisés par NOVAVOX.",
+    "Découvrez les sites web, applications, boutiques en ligne et créations graphiques réalisés par NOVAVOX.",
 };
 
 export default function PortfolioPage() {
@@ -39,13 +43,45 @@ export default function PortfolioPage() {
               margin: "0 auto",
             }}
           >
-            Affiches, packagings et supports de communication conçus avec soin par notre équipe créative.
+            Sites web, applications, boutiques en ligne et créations graphiques conçus avec soin par notre équipe.
           </p>
         </div>
       </section>
 
       <section className="nv-section" style={{ paddingTop: "2rem" }}>
         <div className="nv-container">
+          <ScrollReveal>
+            <SectionHeading
+              badge="Solutions digitales"
+              title="Sites et applications réalisés"
+              subtitle="Découvrez des expériences digitales pensées pour répondre aux objectifs de chaque activité."
+            />
+          </ScrollReveal>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 320px), 1fr))",
+              gap: "1.5rem",
+            }}
+          >
+            {projects.map((project, index) => (
+              <ScrollReveal key={project.id} delay={index * 80}>
+                <ProjectCard project={project} />
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="nv-section" style={{ background: "var(--nv-bg-secondary)" }}>
+        <div className="nv-container">
+          <ScrollReveal>
+            <SectionHeading
+              badge="Communication visuelle"
+              title="Créations graphiques"
+              subtitle="Affiches, packagings et supports conçus par notre équipe créative."
+            />
+          </ScrollReveal>
           <GraphicGallery creations={graphicCreations} />
         </div>
       </section>

@@ -37,23 +37,11 @@ function CreationCard({ creation }: { creation: GraphicCreation }) {
 }
 
 export default function GraphicGallery({ creations }: GraphicGalleryProps) {
-  const panoramas = creations.filter((creation) => creation.width / creation.height > 2);
-  const standard = creations.filter((creation) => creation.width / creation.height <= 2);
-
   return (
-    <>
-      <div className={styles.gallery}>
-        {standard.map((creation) => (
-          <CreationCard key={creation.id} creation={creation} />
-        ))}
-      </div>
-      {panoramas.length > 0 && (
-        <div className={styles.panoramaGrid}>
-          {panoramas.map((creation) => (
-            <CreationCard key={creation.id} creation={creation} />
-          ))}
-        </div>
-      )}
-    </>
+    <div className={styles.gallery}>
+      {creations.map((creation) => (
+        <CreationCard key={creation.id} creation={creation} />
+      ))}
+    </div>
   );
 }

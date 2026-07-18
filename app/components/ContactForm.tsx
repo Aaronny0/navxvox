@@ -4,12 +4,12 @@ import { useState } from "react";
 import { submitContact } from "@/app/actions";
 
 const projectTypes = [
-  "Site vitrine",
-  "Application web",
-  "E-commerce",
-  "Design UX/UI",
-  "SEO & Visibilité",
-  "Maintenance",
+  "Communication & Stratégie",
+  "Branding & Identité Visuelle",
+  "Création Graphique & Contenus",
+  "Sites Web & E-commerce",
+  "Applications & Solutions Digitales",
+  "Sécurité Informatique",
   "Autre",
 ];
 

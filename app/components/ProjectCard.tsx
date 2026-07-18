@@ -22,17 +22,13 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           flexDirection: "column",
         }}
       >
-        {/* Image placeholder */}
+        {/* Project preview */}
         <div
           style={{
             height: "220px",
-            background: `linear-gradient(135deg, ${
-              project.category === "E-commerce"
-                ? "rgba(46,196,182,0.24)"
-                : project.category === "Application Web"
-                ? "rgba(13,61,102,0.52)"
-                : "rgba(46,196,182,0.18)"
-            } 0%, rgba(6,26,43,0.9) 100%)`,
+            backgroundImage: `linear-gradient(180deg, rgba(6,26,43,0.02) 45%, rgba(6,26,43,0.84) 100%), url("${project.image}")`,
+            backgroundSize: "cover",
+            backgroundPosition: "top center",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -40,17 +36,6 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             overflow: "hidden",
           }}
         >
-          <span
-            style={{
-              fontSize: "3rem",
-              opacity: 0.4,
-              fontFamily: "Outfit, sans-serif",
-              fontWeight: 800,
-              color: "var(--nv-text-primary)",
-            }}
-          >
-            {project.title.charAt(0)}
-          </span>
           {/* Category badge */}
           <div
             style={{
@@ -62,18 +47,20 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             <span className="nv-badge">{project.category}</span>
           </div>
           {/* Year */}
-          <span
-            style={{
-              position: "absolute",
-              bottom: "1rem",
-              right: "1rem",
-              fontSize: "0.75rem",
-              color: "var(--nv-text-muted)",
-              fontFamily: "Outfit, sans-serif",
-            }}
-          >
-            {project.year}
-          </span>
+          {project.year && (
+            <span
+              style={{
+                position: "absolute",
+                bottom: "1rem",
+                right: "1rem",
+                fontSize: "0.75rem",
+                color: "#fff",
+                fontFamily: "Outfit, sans-serif",
+              }}
+            >
+              {project.year}
+            </span>
+          )}
         </div>
         {/* Content */}
         <div

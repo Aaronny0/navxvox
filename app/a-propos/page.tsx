@@ -8,14 +8,25 @@ import ScrollReveal from "@/app/components/ScrollReveal";
 export const metadata: Metadata = {
   title: "À Propos",
   description:
-    "Découvrez NOVAVOX : notre histoire, notre mission, nos valeurs et l'équipe passionnée derrière vos projets web.",
+    "Découvrez NOVAVOX : notre mission, notre vision, nos valeurs et l'équipe qui accompagne vos projets de communication et de transformation digitale.",
 };
 
 const values = [
-  { icon: "💡", title: "Créativité", description: "Des designs uniques qui captent l'attention et marquent les esprits." },
-  { icon: "🎯", title: "Professionnalisme", description: "Rigueur, transparence et respect des engagements à chaque étape." },
-  { icon: "⭐", title: "Excellence", description: "Un souci du détail obsessionnel pour des résultats qui dépassent les attentes." },
-  { icon: "🔒", title: "Confidentialité", description: "Protection totale de vos données et de vos idées. NDA disponible." },
+  {
+    icon: "🤝",
+    title: "Professionnalisme",
+    description: "Rigueur, écoute et respect de nos engagements à chaque étape.",
+  },
+  {
+    icon: "⭐",
+    title: "Excellence",
+    description: "Des standards élevés pour créer des solutions soignées, efficaces et durables.",
+  },
+  {
+    icon: "🔒",
+    title: "Confidentialité",
+    description: "La protection de vos informations, de vos idées et de vos projets est notre priorité.",
+  },
 ];
 
 export default function AProposPage() {
@@ -35,45 +46,52 @@ export default function AProposPage() {
         <div className="nv-container" style={{ position: "relative", zIndex: 1 }}>
           <span className="nv-badge" style={{ marginBottom: "1rem" }}>À Propos</span>
           <h1 style={{ marginBottom: "1rem" }}>
-            L&apos;agence web qui <span className="nv-text-gradient">fait la différence</span>
+            L&apos;agence créative qui <span className="nv-text-gradient">fait la différence</span>
           </h1>
           <p style={{ fontSize: "1.1rem", color: "var(--nv-text-secondary)", maxWidth: "640px", margin: "0 auto" }}>
-            Fondée par des passionnés du digital, NOVAVOX accompagne les entreprises ambitieuses dans leur transformation numérique depuis 5 ans.
+            Fondée par des passionnés du digital, NOVAVOX accompagne les entreprises et les particuliers dans leur transformation numérique depuis 3 ans.
           </p>
         </div>
       </section>
 
-      {/* Histoire & Mission */}
+      {/* Mission & Vision */}
       <section className="nv-section">
         <div className="nv-container">
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))", gap: "3rem", alignItems: "center" }}>
             <ScrollReveal>
               <div>
-                <span className="nv-badge" style={{ marginBottom: "1rem" }}>Notre Histoire</span>
+                <span className="nv-badge" style={{ marginBottom: "1rem" }}>Notre Mission</span>
                 <h2 style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(1.5rem, 3vw, 2.25rem)", marginBottom: "1rem" }}>
-                  Née de la passion, forgée par l&apos;exigence
+                  Valoriser votre image et accélérer votre transformation digitale
                 </h2>
-                <p style={{ color: "var(--nv-text-secondary)", lineHeight: 1.9, marginBottom: "1rem" }}>
-                  NOVAVOX est née d&apos;un constat simple : trop de projets web ne sont pas à la hauteur des ambitions de leurs commanditaires. Nous avons décidé de changer la donne.
-                </p>
                 <p style={{ color: "var(--nv-text-secondary)", lineHeight: 1.9 }}>
-                  Notre mission est de concevoir des expériences digitales qui allient beauté, performance et résultats concrets. Chaque pixel compte. Chaque ligne de code a un objectif.
+                  Accompagner les entreprises et les particuliers dans la valorisation de leur image et leur transformation digitale, grâce à des solutions de communication créatives, efficaces et adaptées à leurs besoins.
                 </p>
               </div>
             </ScrollReveal>
             <ScrollReveal delay={200}>
               <div
                 style={{
-                  height: "360px",
+                  minHeight: "300px",
                   borderRadius: "var(--nv-radius-lg)",
                   background: "linear-gradient(135deg, rgba(13,61,102,0.52) 0%, rgba(46,196,182,0.14) 50%, rgba(6,26,43,0.94) 100%)",
                   border: "1px solid var(--nv-border-light)",
                   display: "flex",
+                  flexDirection: "column",
                   alignItems: "center",
                   justifyContent: "center",
+                  padding: "clamp(2rem, 5vw, 3.5rem)",
+                  textAlign: "center",
                 }}
               >
-                <span style={{ fontSize: "5rem", opacity: 0.3 }}>🚀</span>
+                <span style={{ fontSize: "3rem", marginBottom: "1rem" }}>🚀</span>
+                <span className="nv-badge" style={{ marginBottom: "1rem" }}>Notre Vision</span>
+                <h2 style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(1.4rem, 3vw, 2rem)", marginBottom: "1rem" }}>
+                  Faire rayonner les marques
+                </h2>
+                <p style={{ color: "var(--nv-text-secondary)", lineHeight: 1.8, margin: 0, maxWidth: "520px" }}>
+                  Être l&apos;agence qui aide les marques à se démarquer, à renforcer leur rayonnement et à atteindre leur plein potentiel.
+                </p>
               </div>
             </ScrollReveal>
           </div>
@@ -219,7 +237,7 @@ export default function AProposPage() {
           <ScrollReveal>
             <h2 style={{ fontFamily: "Outfit, sans-serif", marginBottom: "1rem" }}>Envie de travailler avec nous ?</h2>
             <p style={{ color: "var(--nv-text-secondary)", maxWidth: "500px", margin: "0 auto 2rem" }}>
-              Rejoignez les 120+ entreprises qui nous font confiance.
+              Rejoignez les entreprises et les particuliers qui nous font confiance.
             </p>
             <Link href="/contact" className="nv-btn nv-btn-primary">
               Parlons de votre projet →

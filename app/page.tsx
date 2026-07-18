@@ -1,15 +1,17 @@
 import Link from "next/link";
-import { services, stats, testimonials } from "@/lib/data";
+import { getFeaturedProjects, services, stats, testimonials } from "@/lib/data";
 import { featuredGraphicCreations } from "@/lib/creations";
-import TypewriterEffect from "./components/TypewriterEffect";
 import AnimatedCounter from "./components/AnimatedCounter";
 import ServiceCard from "./components/ServiceCard";
+import ProjectCard from "./components/ProjectCard";
 import GraphicGallery from "./components/GraphicGallery";
 import SectionHeading from "./components/SectionHeading";
 import TestimonialSlider from "./components/TestimonialSlider";
 import ScrollReveal from "./components/ScrollReveal";
 
 export default function Home() {
+  const featuredProjects = getFeaturedProjects();
+
   return (
     <>
       {/* ═══════════════ HERO ═══════════════ */}
@@ -32,7 +34,7 @@ export default function Home() {
         <div className="nv-container" style={{ position: "relative", zIndex: 1, textAlign: "center" }}>
           <div style={{ animation: "fadeInUp 0.8s ease" }}>
             <span className="nv-badge" style={{ marginBottom: "1.5rem" }}>
-              ✨ Agence Web Premium
+              ✨ NOVAVOX
             </span>
           </div>
 
@@ -45,10 +47,7 @@ export default function Home() {
               marginRight: "auto",
             }}
           >
-            Nous créons des expériences web{" "}
-            <TypewriterEffect
-              words={["mémorables", "performantes", "sur mesure", "exceptionnelles"]}
-            />
+            L&apos;impact commence <span className="nv-text-gradient">ici.</span>
           </h1>
 
           <p
@@ -61,8 +60,8 @@ export default function Home() {
               lineHeight: 1.8,
             }}
           >
-            NOVAVOX conçoit des sites vitrines, applications web et e-commerces
-            qui propulsent votre business. Design premium, performances optimales.
+            NOVAVOX valorise votre image grâce à la communication, au branding,
+            aux solutions digitales et à la sécurité informatique.
           </p>
 
           <div
@@ -137,8 +136,8 @@ export default function Home() {
           <ScrollReveal>
             <SectionHeading
               badge="Nos Services"
-              title="Des solutions digitales complètes"
-              subtitle="De l'idée à la réalisation, nous maîtrisons chaque étape de votre projet web."
+              title="Une expertise créative et digitale complète"
+              subtitle="Communication, identité de marque, création, développement et sécurité réunis pour répondre à vos besoins."
             />
           </ScrollReveal>
 
@@ -178,7 +177,25 @@ export default function Home() {
             />
           </ScrollReveal>
 
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 320px), 1fr))",
+              gap: "1.5rem",
+              marginBottom: "3rem",
+            }}
+          >
+            {featuredProjects.map((project, index) => (
+              <ScrollReveal key={project.id} delay={index * 80}>
+                <ProjectCard project={project} />
+              </ScrollReveal>
+            ))}
+          </div>
+
           <ScrollReveal>
+            <h3 style={{ fontFamily: "Outfit, sans-serif", fontSize: "1.35rem", marginBottom: "1.5rem" }}>
+              Créations graphiques
+            </h3>
             <GraphicGallery creations={featuredGraphicCreations} />
           </ScrollReveal>
 
