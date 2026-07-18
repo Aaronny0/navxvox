@@ -4,7 +4,7 @@ import { Document, Page, Text, View, StyleSheet, renderToStream } from '@react-p
 const styles = StyleSheet.create({
   page: { padding: 40, fontFamily: "Helvetica", fontSize: 11, color: "#333" },
   header: { flexDirection: "row", justifyContent: "space-between", marginBottom: 40, paddingBottom: 20, borderBottomWidth: 1, borderBottomColor: "#eee" },
-  logoText: { fontSize: 24, fontWeight: "bold", color: "#6d28d9" }, // nv-accent-violet
+  logoText: { fontSize: 24, fontWeight: "bold", color: "#0d3d66" },
   title: { fontSize: 20, fontWeight: "bold", color: "#111", marginBottom: 5 },
   label: { fontSize: 10, color: "#6b7280", marginBottom: 2 },
   section: { marginBottom: 30 },

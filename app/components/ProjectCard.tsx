@@ -28,11 +28,11 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             height: "220px",
             background: `linear-gradient(135deg, ${
               project.category === "E-commerce"
-                ? "rgba(0,200,224,0.2)"
+                ? "rgba(46,196,182,0.24)"
                 : project.category === "Application Web"
-                ? "rgba(21,101,192,0.22)"
-                : "rgba(26,111,212,0.22)"
-            } 0%, rgba(10,14,26,0.82) 100%)`,
+                ? "rgba(13,61,102,0.52)"
+                : "rgba(46,196,182,0.18)"
+            } 0%, rgba(6,26,43,0.9) 100%)`,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",

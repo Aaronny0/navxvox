@@ -116,7 +116,7 @@ export default async function BlogPostPage({
             style={{
               height: "300px",
               borderRadius: "var(--nv-radius-lg)",
-              background: "linear-gradient(135deg, rgba(26,111,212,0.16) 0%, rgba(0,200,224,0.08) 100%)",
+              background: "linear-gradient(135deg, rgba(13,61,102,0.38) 0%, rgba(46,196,182,0.11) 100%)",
               border: "1px solid var(--nv-border-light)",
               display: "flex",
               alignItems: "center",
@@ -163,7 +163,7 @@ export default async function BlogPostPage({
             <h2 style={{ fontFamily: "Outfit, sans-serif", fontSize: "1.5rem", marginBottom: "2rem", textAlign: "center" }}>
               Articles similaires
             </h2>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: "1.5rem" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 300px), 1fr))", gap: "1.5rem" }}>
               {related.map((r) => (
                 <Link key={r.id} href={`/blog/${r.slug}`} style={{ textDecoration: "none" }}>
                   <div className="nv-card">

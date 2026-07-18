@@ -2,10 +2,10 @@ import type { Service } from "@/lib/data";
 
 interface ServiceCardProps {
   service: Service;
-  index: number;
+  showPrice?: boolean;
 }
 
-export default function ServiceCard({ service, index }: ServiceCardProps) {
+export default function ServiceCard({ service, showPrice = true }: ServiceCardProps) {
   return (
     <div
       className="nv-card"
@@ -58,7 +58,7 @@ export default function ServiceCard({ service, index }: ServiceCardProps) {
         >
           {service.description}
         </p>
-        {service.price && (
+        {(service.delay || (showPrice && service.price)) && (
           <div
             style={{
               marginTop: "1rem",
@@ -71,9 +71,11 @@ export default function ServiceCard({ service, index }: ServiceCardProps) {
             }}
           >
             <span style={{ color: "var(--nv-text-muted)" }}>{service.delay}</span>
-            <span style={{ color: service.color, fontWeight: 600, fontFamily: "Outfit, sans-serif" }}>
-              {service.price}
-            </span>
+            {showPrice && service.price && (
+              <span style={{ color: service.color, fontWeight: 600, fontFamily: "Outfit, sans-serif" }}>
+                {service.price}
+              </span>
+            )}
           </div>
         )}
       </div>

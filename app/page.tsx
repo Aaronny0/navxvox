@@ -1,17 +1,15 @@
 import Link from "next/link";
 import { services, stats, testimonials } from "@/lib/data";
-import { getFeaturedProjects } from "@/lib/data";
+import { featuredGraphicCreations } from "@/lib/creations";
 import TypewriterEffect from "./components/TypewriterEffect";
 import AnimatedCounter from "./components/AnimatedCounter";
 import ServiceCard from "./components/ServiceCard";
-import ProjectCard from "./components/ProjectCard";
+import GraphicGallery from "./components/GraphicGallery";
 import SectionHeading from "./components/SectionHeading";
 import TestimonialSlider from "./components/TestimonialSlider";
 import ScrollReveal from "./components/ScrollReveal";
 
 export default function Home() {
-  const featuredProjects = getFeaturedProjects();
-
   return (
     <>
       {/* ═══════════════ HERO ═══════════════ */}
@@ -78,9 +76,6 @@ export default function Home() {
           >
             <Link href="/contact" className="nv-btn nv-btn-primary">
               Démarrer un projet →
-            </Link>
-            <Link href="/client/login" className="nv-btn nv-btn-ghost">
-              Espace Client 🔐
             </Link>
             <Link href="/portfolio" className="nv-btn nv-btn-ghost">
               Voir nos réalisations
@@ -150,13 +145,13 @@ export default function Home() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 320px), 1fr))",
               gap: "1.5rem",
             }}
           >
             {services.map((service, i) => (
               <ScrollReveal key={service.id} delay={i * 80}>
-                <ServiceCard service={service} index={i} />
+                <ServiceCard service={service} showPrice={false} />
               </ScrollReveal>
             ))}
           </div>
@@ -183,19 +178,9 @@ export default function Home() {
             />
           </ScrollReveal>
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))",
-              gap: "1.5rem",
-            }}
-          >
-            {featuredProjects.map((project, i) => (
-              <ScrollReveal key={project.id} delay={i * 100}>
-                <ProjectCard project={project} />
-              </ScrollReveal>
-            ))}
-          </div>
+          <ScrollReveal>
+            <GraphicGallery creations={featuredGraphicCreations} />
+          </ScrollReveal>
 
           <div style={{ textAlign: "center", marginTop: "3rem" }}>
             <Link href="/portfolio" className="nv-btn nv-btn-ghost">
@@ -226,7 +211,7 @@ export default function Home() {
       <section
         style={{
           padding: "6rem 0",
-          background: "linear-gradient(135deg, rgba(26,111,212,0.14) 0%, rgba(0,200,224,0.07) 100%)",
+          background: "linear-gradient(135deg, rgba(13,61,102,0.32) 0%, rgba(46,196,182,0.1) 100%)",
           borderTop: "1px solid var(--nv-border-light)",
           textAlign: "center",
           position: "relative",

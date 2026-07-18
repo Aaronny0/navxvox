@@ -33,7 +33,7 @@ export function ProjectsTable({ projects }: { projects: Project[] }) {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "pending": return <span className="nv-badge" style={{ background: "rgba(230, 92, 0, 0.12)", color: "var(--nv-warning)" }}>En attente</span>;
-      case "active": return <span className="nv-badge" style={{ background: "rgba(0, 200, 224, 0.12)", color: "var(--nv-accent-cyan)" }}>En cours</span>;
+      case "active": return <span className="nv-badge" style={{ background: "rgba(46, 196, 182, 0.12)", color: "var(--nv-accent-cyan)" }}>En cours</span>;
       case "revision": return <span className="nv-badge" style={{ background: "rgba(230, 92, 0, 0.12)", color: "var(--nv-warning)" }}>En révision</span>;
       case "delivered": return <span className="nv-badge" style={{ background: "rgba(27, 138, 78, 0.12)", color: "var(--nv-success)" }}>Livré</span>;
       case "archived": return <span className="nv-badge" style={{ background: "rgba(255, 255, 255, 0.1)", color: "var(--nv-text-secondary)" }}>Archivé</span>;

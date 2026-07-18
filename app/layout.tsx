@@ -44,9 +44,9 @@ export const metadata: Metadata = {
       "Design exceptionnel, performances optimales, résultats mesurables. Votre ambition mérite la meilleure agence web.",
     images: [
       {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
+        url: "/brand/novavox-logo.jpeg",
+        width: 1254,
+        height: 1254,
         alt: "NOVAVOX — Agence Web Premium",
       },
     ],
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "NOVAVOX — Agence Web Premium",
     description: "Sites vitrine, applications web et e-commerce sur mesure.",
-    images: ["/og-image.jpg"],
+    images: ["/brand/novavox-logo.jpeg"],
   },
   robots: {
     index: true,

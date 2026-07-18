@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 const navLinks = [
@@ -61,11 +62,11 @@ export default function Header() {
         transition: "all var(--nv-transition)",
         padding: scrolled ? "0.75rem 0" : "1.25rem 0",
         background: scrolled
-          ? "rgba(10, 14, 26, 0.85)"
+          ? "rgba(6, 26, 43, 0.9)"
           : "transparent",
         backdropFilter: scrolled ? "blur(12px)" : "none",
         borderBottom: scrolled
-          ? "1px solid rgba(26, 111, 212, 0.2)"
+          ? "1px solid rgba(46, 196, 182, 0.2)"
           : "1px solid transparent",
       }}
     >
@@ -93,22 +94,24 @@ export default function Header() {
           >
             <span
               style={{
-                width: "36px",
-                height: "36px",
-                background: "var(--nv-grad-primary)",
+                width: "42px",
+                height: "42px",
+                position: "relative",
                 borderRadius: "10px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: "1rem",
-                fontWeight: 900,
-                color: "#fff",
-                fontFamily: "var(--font-outfit)",
+                display: "block",
+                overflow: "hidden",
                 boxShadow: "var(--nv-shadow-md)",
                 flexShrink: 0,
               }}
             >
-              N
+              <Image
+                src="/brand/novavox-logo.jpeg"
+                alt=""
+                fill
+                sizes="42px"
+                style={{ objectFit: "cover" }}
+                priority
+              />
             </span>
             <span
               style={{
@@ -155,7 +158,7 @@ export default function Header() {
                         : "var(--nv-text-secondary)",
                     background:
                       activeLink === link.href
-                        ? "rgba(26, 111, 212, 0.14)"
+                        ? "rgba(46, 196, 182, 0.12)"
                         : "transparent",
                     transition: "all var(--nv-transition)",
                     textDecoration: "none",
@@ -252,7 +255,7 @@ export default function Header() {
           style={{
             position: "fixed",
             inset: 0,
-            background: "rgba(10, 14, 26, 0.97)",
+            background: "rgba(6, 26, 43, 0.98)",
             backdropFilter: "blur(12px)",
             display: "flex",
             flexDirection: "column",

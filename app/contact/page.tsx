@@ -55,7 +55,7 @@ export default function ContactPage() {
                 <div
                   style={{
                     padding: "1.25rem",
-                    background: "rgba(26,111,212,0.06)",
+                    background: "rgba(46,196,182,0.07)",
                     border: "1px solid var(--nv-border-light)",
                     borderRadius: "var(--nv-radius-md)",
                     display: "flex",
@@ -126,7 +126,7 @@ export default function ContactPage() {
                               width: "36px",
                               height: "36px",
                               borderRadius: "8px",
-                              background: "rgba(26,111,212,0.12)",
+                              background: "rgba(46,196,182,0.12)",
                               display: "flex",
                               alignItems: "center",
                               justifyContent: "center",

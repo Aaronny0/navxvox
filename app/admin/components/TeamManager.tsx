@@ -75,7 +75,7 @@ export function TeamManager({ members, currentUserId }: { members: Member[], cur
                 <td style={{ padding: "1rem", fontWeight: 600 }}>{member.firstName} {member.lastName}</td>
                 <td style={{ padding: "1rem", color: "var(--nv-text-secondary)" }}>{member.email}</td>
                 <td style={{ padding: "1rem" }}>
-                  <span className="nv-badge" style={{ background: member.role === "SUPER_ADMIN" ? "rgba(26, 111, 212, 0.12)" : "rgba(255,255,255,0.05)", color: member.role === "SUPER_ADMIN" ? "var(--nv-accent-violet)" : "var(--nv-text-primary)" }}>
+                  <span className="nv-badge" style={{ background: member.role === "SUPER_ADMIN" ? "rgba(46, 196, 182, 0.12)" : "rgba(255,255,255,0.05)", color: member.role === "SUPER_ADMIN" ? "var(--nv-accent-violet)" : "var(--nv-text-primary)" }}>
                     {member.role}
                   </span>
                 </td>

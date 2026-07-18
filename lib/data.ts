@@ -112,7 +112,7 @@ export const services: Service[] = [
     ],
     delay: "2–4 semaines",
     price: "À partir de 1 500 €",
-    color: "#8b5cf6",
+    color: "#2ec4b6",
   },
   {
     id: "s2",
@@ -133,7 +133,7 @@ export const services: Service[] = [
     ],
     delay: "4–12 semaines",
     price: "À partir de 5 000 €",
-    color: "#6366f1",
+    color: "#2ec4b6",
   },
   {
     id: "s3",
@@ -154,7 +154,7 @@ export const services: Service[] = [
     ],
     delay: "1–3 semaines",
     price: "À partir de 800 €",
-    color: "#22d3ee",
+    color: "#2ec4b6",
   },
   {
     id: "s4",
@@ -175,7 +175,7 @@ export const services: Service[] = [
     ],
     delay: "3–8 semaines",
     price: "À partir de 2 500 €",
-    color: "#ec4899",
+    color: "#2ec4b6",
   },
   {
     id: "s5",
@@ -196,7 +196,7 @@ export const services: Service[] = [
     ],
     delay: "Dès 3 mois",
     price: "À partir de 400 €/mois",
-    color: "#f59e0b",
+    color: "#2ec4b6",
   },
   {
     id: "s6",
@@ -217,7 +217,7 @@ export const services: Service[] = [
     ],
     delay: "Contrat mensuel",
     price: "À partir de 150 €/mois",
-    color: "#10b981",
+    color: "#2ec4b6",
   },
 ];
 
@@ -621,42 +621,32 @@ export const blogCategories = [
 export const teamMembers: TeamMember[] = [
   {
     id: "tm1",
-    name: "Alexandre Renaud",
-    role: "Fondateur & Directeur Créatif",
-    bio: "10 ans d'expérience en design et stratégie digitale. Passionné par les interfaces qui allient beauté et performance.",
-    avatar: "AR",
-    skills: ["Direction créative", "UX Strategy", "Branding", "Next.js"],
-    socials: { linkedin: "#", twitter: "#" },
+    name: "CATRAYE Aaron",
+    role: "Responsable administratif et financier",
+    bio: "Supervise la gestion administrative, financière et le suivi des opérations de NOVAVOX.",
+    avatar: "CA",
+    skills: ["Administration", "Finance", "Pilotage", "Suivi opérationnel"],
+    socials: {},
   },
   {
     id: "tm2",
-    name: "Marie Leblanc",
-    role: "Lead Designer",
-    bio: "Spécialiste UX/UI avec une approche centrée sur l'humain. Experte Figma et design systems.",
-    avatar: "ML",
-    skills: ["Figma", "Design System", "UX Research", "Motion Design"],
-    socials: { linkedin: "#", twitter: "#" },
+    name: "BESSANVI Précieux",
+    role: "Directeur d'agence",
+    bio: "Coordonne la vision, les activités et le développement de l'agence NOVAVOX.",
+    avatar: "BP",
+    skills: ["Direction", "Stratégie", "Développement", "Coordination"],
+    socials: {},
   },
   {
     id: "tm3",
-    name: "Thomas Girard",
-    role: "Lead Developer",
-    bio: "Full-stack engineer spécialisé React/Next.js. Obsédé par les performances et le code propre.",
-    avatar: "TG",
-    skills: ["Next.js", "TypeScript", "Node.js", "PostgreSQL"],
-    socials: { linkedin: "#", github: "#" },
-  },
-  {
-    id: "tm4",
-    name: "Laura Simon",
-    role: "SEO & Growth Strategist",
-    bio: "Experte en référencement naturel et acquisition digitale. Certifiée Google Analytics & Search Console.",
-    avatar: "LS",
-    skills: ["SEO Technique", "Content Strategy", "Analytics", "SEM"],
-    socials: { linkedin: "#", twitter: "#" },
+    name: "KPEHOUNDJE Conania",
+    role: "Responsable administratif et financier adjoint",
+    bio: "Assiste le responsable administratif et financier dans le suivi opérationnel et budgétaire.",
+    avatar: "KC",
+    skills: ["Administration", "Budget", "Reporting", "Appui opérationnel"],
+    socials: {},
   },
 ];
-
 /* ============================================================
    STATISTIQUES CLÉS
    ============================================================ */

@@ -46,7 +46,7 @@ export default function AProposPage() {
       {/* Histoire & Mission */}
       <section className="nv-section">
         <div className="nv-container">
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "3rem", alignItems: "center" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))", gap: "3rem", alignItems: "center" }}>
             <ScrollReveal>
               <div>
                 <span className="nv-badge" style={{ marginBottom: "1rem" }}>Notre Histoire</span>
@@ -66,7 +66,7 @@ export default function AProposPage() {
                 style={{
                   height: "360px",
                   borderRadius: "var(--nv-radius-lg)",
-                  background: "linear-gradient(135deg, rgba(26,111,212,0.22) 0%, rgba(0,200,224,0.1) 50%, rgba(10,14,26,0.9) 100%)",
+                  background: "linear-gradient(135deg, rgba(13,61,102,0.52) 0%, rgba(46,196,182,0.14) 50%, rgba(6,26,43,0.94) 100%)",
                   border: "1px solid var(--nv-border-light)",
                   display: "flex",
                   alignItems: "center",
@@ -158,8 +158,8 @@ export default function AProposPage() {
                           key={s}
                           style={{
                             padding: "0.2rem 0.5rem",
-                            background: "rgba(26,111,212,0.12)",
-                            border: "1px solid rgba(26,111,212,0.24)",
+                            background: "rgba(46,196,182,0.12)",
+                            border: "1px solid rgba(46,196,182,0.24)",
                             borderRadius: "4px",
                             fontSize: "0.7rem",
                             color: "var(--nv-accent-violet)",

@@ -36,7 +36,7 @@ export default function PortfolioFilter({
                 : "1px solid var(--nv-border-light)",
             background:
               activeCategory === cat
-                ? "rgba(26,111,212,0.16)"
+                ? "rgba(46,196,182,0.14)"
                 : "rgba(255,255,255,0.03)",
             color:
               activeCategory === cat

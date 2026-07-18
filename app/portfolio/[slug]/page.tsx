@@ -78,7 +78,7 @@ export default async function ProjectDetailPage({
             style={{
               height: "400px",
               borderRadius: "var(--nv-radius-lg)",
-              background: `linear-gradient(135deg, rgba(26,111,212,0.16) 0%, rgba(0,200,224,0.08) 50%, rgba(10,14,26,0.9) 100%)`,
+              background: `linear-gradient(135deg, rgba(13,61,102,0.48) 0%, rgba(46,196,182,0.12) 50%, rgba(6,26,43,0.94) 100%)`,
               border: "1px solid var(--nv-border-light)",
               display: "flex",
               alignItems: "center",
@@ -135,8 +135,8 @@ export default async function ProjectDetailPage({
                           key={r}
                           style={{
                             padding: "1rem 1.5rem",
-                            background: "rgba(26,111,212,0.1)",
-                            border: "1px solid rgba(26,111,212,0.24)",
+                            background: "rgba(46,196,182,0.09)",
+                            border: "1px solid rgba(46,196,182,0.24)",
                             borderRadius: "var(--nv-radius-md)",
                             fontFamily: "Outfit, sans-serif",
                             fontWeight: 600,
@@ -227,7 +227,7 @@ export default async function ProjectDetailPage({
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))",
+                gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 340px), 1fr))",
                 gap: "1.5rem",
               }}
             >

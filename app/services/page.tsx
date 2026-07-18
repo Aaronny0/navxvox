@@ -43,14 +43,14 @@ export default function ServicesPage() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 340px), 1fr))",
               gap: "1.5rem",
             }}
           >
             {services.map((service, i) => (
               <ScrollReveal key={service.id} delay={i * 80}>
                 <div>
-                  <ServiceCard service={service} index={i} />
+                  <ServiceCard service={service} />
                   {/* Features list */}
                   <div
                     style={{
@@ -112,7 +112,7 @@ export default function ServicesPage() {
         style={{
           padding: "5rem 0",
           textAlign: "center",
-          background: "linear-gradient(135deg, rgba(26,111,212,0.12) 0%, rgba(0,200,224,0.06) 100%)",
+          background: "linear-gradient(135deg, rgba(13,61,102,0.3) 0%, rgba(46,196,182,0.09) 100%)",
         }}
       >
         <div className="nv-container">

@@ -57,9 +57,9 @@ export default function ContactForm() {
         style={{
           textAlign: "center",
           padding: "3rem 2rem",
-          background: "rgba(26,111,212,0.1)",
+          background: "rgba(46,196,182,0.09)",
           borderRadius: "var(--nv-radius-lg)",
-          border: "1px solid rgba(26,111,212,0.24)",
+          border: "1px solid rgba(46,196,182,0.24)",
         }}
       >
         <span style={{ fontSize: "3rem", display: "block", marginBottom: "1rem" }}>✅</span>

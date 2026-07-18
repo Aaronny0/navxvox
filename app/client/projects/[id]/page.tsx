@@ -42,7 +42,7 @@ export default async function ProjectDetailPage({
   const getStatusColor = (status: string) => {
     switch (status) {
       case "pending": return { bg: "rgba(230,92,0,0.12)", text: "var(--nv-warning)", label: "En attente" };
-      case "active": return { bg: "rgba(26,111,212,0.12)", text: "var(--nv-accent-violet)", label: "En cours" };
+      case "active": return { bg: "rgba(46,196,182,0.12)", text: "var(--nv-accent-violet)", label: "En cours" };
       case "revision": return { bg: "rgba(230,92,0,0.12)", text: "var(--nv-warning)", label: "En révision" };
       case "delivered": return { bg: "rgba(27,138,78,0.12)", text: "var(--nv-success)", label: "Livré" };
       default: return { bg: "rgba(255,255,255,0.05)", text: "var(--nv-text-secondary)", label: status };

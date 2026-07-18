@@ -54,7 +54,7 @@ export default function BlogPage() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 340px), 1fr))",
               gap: "1.5rem",
             }}
           >
@@ -66,8 +66,8 @@ export default function BlogPage() {
                     <div
                       style={{
                         height: "200px",
-                        background: `linear-gradient(135deg, rgba(26,111,212,0.16) 0%, rgba(${
-                          post.categorySlug === "design" ? "0,200,224" : post.categorySlug === "developpement" ? "21,101,192" : "26,111,212"
+                        background: `linear-gradient(135deg, rgba(13,61,102,0.34) 0%, rgba(${
+                          post.categorySlug === "design" ? "46,196,182" : post.categorySlug === "developpement" ? "13,61,102" : "46,196,182"
                         },0.1) 100%)`,
                         display: "flex",
                         alignItems: "center",

@@ -1,6 +1,6 @@
 .page { color: #182136; }
 .header { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 26px; }
-.eyebrow { margin: 0 0 7px; color: #3678ee; font-size: 10px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.eyebrow { margin: 0 0 7px; color: #2ec4b6; font-size: 10px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
 .title { margin: 0; color: #fff; font-size: 34px; letter-spacing: -.035em; }
 .intro { max-width: 660px; margin: 10px 0 0; color: rgba(232,244,255,.58); font-size: 12px; line-height: 1.65; }
 .summary { display: grid; grid-template-columns: repeat(3, minmax(150px,1fr)); gap: 10px; min-width: 460px; }
@@ -13,7 +13,7 @@
 .tabActive { background: #fff; color: #172033; }
 .count { padding-right: 10px; color: rgba(232,244,255,.42); font-size: 10px; }
 .list { display: grid; gap: 11px; }
-.card { overflow: hidden; border: 1px solid rgba(255,255,255,.08); border-radius: 15px; background: #111a2c; }
+.card { overflow: hidden; border: 1px solid rgba(46,196,182,.12); border-radius: 15px; background: #0a2b46; }
 .cardMain { display: grid; grid-template-columns: minmax(240px,1.3fr) minmax(290px,1fr) auto; gap: 28px; align-items: center; padding: 20px 22px; }
 .orderTop { display: flex; align-items: center; gap: 10px; }
 .orderName { margin: 0; color: #fff; font-size: 14px; font-weight: 750; }
