@@ -16,6 +16,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://novavox.fr"),
   title: {
     default: "NOVAVOX — Agence Web Premium | Sites & Applications Sur Mesure",
     template: "%s | NOVAVOX",
