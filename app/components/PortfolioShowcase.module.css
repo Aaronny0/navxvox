@@ -1,0 +1,97 @@
+.showcase {
+  padding-top: 2rem;
+}
+
+.tabsWrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+
+.tabs {
+  display: inline-grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.4rem;
+  padding: 0.4rem;
+  border: 1px solid var(--nv-border-light);
+  border-radius: 999px;
+  background: rgba(6, 26, 43, 0.72);
+  box-shadow: var(--nv-shadow-sm);
+}
+
+.tab {
+  min-height: 48px;
+  padding: 0.75rem 1.4rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--nv-text-secondary);
+  cursor: pointer;
+  font-family: "Outfit", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: color var(--nv-transition), background var(--nv-transition), box-shadow var(--nv-transition);
+}
+
+.tab:hover {
+  color: var(--nv-text-primary);
+  background: rgba(46, 196, 182, 0.08);
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--nv-accent-cyan);
+  outline-offset: 2px;
+}
+
+.tabActive {
+  color: #fff;
+  background: var(--nv-grad-primary);
+  box-shadow: 0 8px 24px rgba(46, 196, 182, 0.18);
+}
+
+.panel {
+  animation: panelIn 240ms ease both;
+}
+
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 1.5rem;
+}
+
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 620px) {
+  .tabsWrap {
+    margin-bottom: 2.5rem;
+  }
+
+  .tabs {
+    width: 100%;
+    border-radius: 18px;
+  }
+
+  .tab {
+    min-height: 54px;
+    padding: 0.65rem 0.75rem;
+    border-radius: 14px;
+    font-size: 0.8rem;
+    line-height: 1.25;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    animation: none;
+  }
+}

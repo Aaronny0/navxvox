@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { projects } from "@/lib/data";
 import { graphicCreations } from "@/lib/creations";
-import GraphicGallery from "@/app/components/GraphicGallery";
-import ProjectCard from "@/app/components/ProjectCard";
-import SectionHeading from "@/app/components/SectionHeading";
-import ScrollReveal from "@/app/components/ScrollReveal";
+import PortfolioShowcase from "@/app/components/PortfolioShowcase";
 
 export const metadata: Metadata = {
   title: "Nos réalisations",
@@ -48,43 +45,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      <section className="nv-section" style={{ paddingTop: "2rem" }}>
-        <div className="nv-container">
-          <ScrollReveal>
-            <SectionHeading
-              badge="Solutions digitales"
-              title="Sites et applications réalisés"
-              subtitle="Découvrez des expériences digitales pensées pour répondre aux objectifs de chaque activité."
-            />
-          </ScrollReveal>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 320px), 1fr))",
-              gap: "1.5rem",
-            }}
-          >
-            {projects.map((project, index) => (
-              <ScrollReveal key={project.id} delay={index * 80}>
-                <ProjectCard project={project} />
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="nv-section" style={{ background: "var(--nv-bg-secondary)" }}>
-        <div className="nv-container">
-          <ScrollReveal>
-            <SectionHeading
-              badge="Communication visuelle"
-              title="Créations graphiques"
-              subtitle="Affiches, packagings et supports conçus par notre équipe créative."
-            />
-          </ScrollReveal>
-          <GraphicGallery creations={graphicCreations} />
-        </div>
-      </section>
+      <PortfolioShowcase projects={projects} creations={graphicCreations} />
     </>
   );
 }

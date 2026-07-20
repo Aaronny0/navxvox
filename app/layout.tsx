@@ -18,7 +18,7 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   metadataBase: new URL("https://novavox.fr"),
   title: {
-    default: "NOVAVOX — L'impact commence ici.",
+    default: "NOVAVOX — Une image forte. Une marque mémorable.",
     template: "%s | NOVAVOX",
   },
   description:
@@ -44,23 +44,23 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     url: "https://novavox.fr",
     siteName: "NOVAVOX",
-    title: "NOVAVOX — L'impact commence ici.",
+    title: "NOVAVOX — Une image forte. Une marque mémorable.",
     description:
       "Des solutions de communication créatives et digitales pour valoriser votre image et renforcer votre impact.",
     images: [
       {
-        url: "/brand/novavox-logo.jpeg",
-        width: 1254,
-        height: 1254,
-        alt: "NOVAVOX — L'impact commence ici.",
+        url: "/og.png",
+        width: 1734,
+        height: 907,
+        alt: "NOVAVOX — Une image forte. Une marque mémorable.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "NOVAVOX — L'impact commence ici.",
+    title: "NOVAVOX — Une image forte. Une marque mémorable.",
     description: "Communication créative et solutions digitales sur mesure.",
-    images: ["/brand/novavox-logo.jpeg"],
+    images: ["/og.png"],
   },
   robots: {
     index: true,

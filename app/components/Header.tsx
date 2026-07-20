@@ -110,7 +110,7 @@ export default function Header() {
                 fill
                 sizes="42px"
                 style={{ objectFit: "cover" }}
-                priority
+                preload
               />
             </span>
             <span

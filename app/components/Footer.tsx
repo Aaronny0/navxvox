@@ -21,9 +21,9 @@ const footerLinks = {
     { href: "/services#securite-informatique", label: "Sécurité Informatique" },
   ],
   legal: [
-    { href: "#", label: "Mentions légales" },
-    { href: "#", label: "Politique de confidentialité" },
-    { href: "#", label: "CGU" },
+    { href: "/mentions-legales", label: "Mentions légales" },
+    { href: "/politique-de-confidentialite", label: "Politique de confidentialité" },
+    { href: "/conditions-generales-utilisation", label: "CGU" },
   ],
 };
 
@@ -351,7 +351,7 @@ export default function Footer() {
           </p>
           <div style={{ display: "flex", gap: "1.5rem" }}>
             {footerLinks.legal.map((link) => (
-              <a
+              <Link
                 key={link.label}
                 href={link.href}
                 style={{
@@ -368,7 +368,7 @@ export default function Footer() {
                 }
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
         </div>

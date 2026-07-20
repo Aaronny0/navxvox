@@ -1,134 +1,116 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { blogPosts, blogCategories, getBlogPostsByCategory, searchBlogPosts } from "@/lib/data";
-import BlogSearch from "@/app/components/BlogSearch";
-import PortfolioFilter from "@/app/components/PortfolioFilter";
+import { blogCategories, blogPosts, getBlogPostsByCategory, searchBlogPosts } from "@/lib/data";
 import ScrollReveal from "@/app/components/ScrollReveal";
+import styles from "./blog.module.css";
 
 export default function BlogPage() {
   const [category, setCategory] = useState("Tous");
   const [search, setSearch] = useState("");
-
-  const filtered = search
-    ? searchBlogPosts(search)
-    : getBlogPostsByCategory(category);
+  const filtered = search ? searchBlogPosts(search) : getBlogPostsByCategory(category);
+  const featured = blogPosts.find((post) => post.featured) ?? blogPosts[0];
 
   return (
-    <>
-      <section
-        style={{
-          paddingTop: "10rem",
-          paddingBottom: "4rem",
-          textAlign: "center",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <div className="nv-orb nv-orb-violet" style={{ width: "400px", height: "400px", top: "-10%", right: "-5%" }} />
-        <div className="nv-container" style={{ position: "relative", zIndex: 1 }}>
-          <span className="nv-badge" style={{ marginBottom: "1rem" }}>Blog</span>
-          <h1 style={{ marginBottom: "1rem" }}>
-            Insights & <span className="nv-text-gradient">Actualités</span>
-          </h1>
-          <p style={{ fontSize: "1.1rem", color: "var(--nv-text-secondary)", maxWidth: "600px", margin: "0 auto 2rem" }}>
-            Tendances, bonnes pratiques et retours d&apos;expérience pour booster votre présence digitale.
-          </p>
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <BlogSearch value={search} onChange={setSearch} />
+    <main className={styles.blogPage}>
+      <section className={styles.blogHero}>
+        <div className={`nv-container ${styles.blogHeroGrid}`}>
+          <div className={styles.blogHeroCopy}>
+            <span className={styles.eyebrow}>Le journal NOVAVOX</span>
+            <h1>Des idées pour faire<br />grandir votre marque.</h1>
+            <p>
+              Design, stratégie, technologie et retours d’expérience expliqués
+              simplement par notre studio.
+            </p>
           </div>
+
+          <Link href={`/blog/${featured.slug}`} className={styles.featuredCard}>
+            <Image
+              src={featured.image}
+              alt={`Illustration de l'article : ${featured.title}`}
+              fill
+              preload
+              sizes="(max-width: 820px) 100vw, 48vw"
+              className={styles.blogImage}
+            />
+            <span className={styles.featuredOverlay} />
+            <span className={styles.featuredContent}>
+              <small>À la une · {featured.category}</small>
+              <strong>{featured.title}</strong>
+              <i>Lire l’article <b aria-hidden="true">↗</b></i>
+            </span>
+          </Link>
         </div>
       </section>
 
-      <section className="nv-section" style={{ paddingTop: "2rem" }}>
+      <section className={styles.blogContent}>
         <div className="nv-container">
-          {!search && (
-            <PortfolioFilter
-              categories={blogCategories}
-              activeCategory={category}
-              onCategoryChange={setCategory}
-            />
-          )}
+          <div className={styles.toolsRow}>
+            <label className={styles.searchField} htmlFor="blog-search">
+              <span aria-hidden="true">⌕</span>
+              <input
+                id="blog-search"
+                type="search"
+                placeholder="Rechercher un article"
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
+              />
+            </label>
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 340px), 1fr))",
-              gap: "1.5rem",
-            }}
-          >
-            {filtered.map((post, i) => (
-              <ScrollReveal key={post.id} delay={i * 80}>
-                <Link href={`/blog/${post.slug}`} style={{ textDecoration: "none" }}>
-                  <article className="nv-card" style={{ padding: 0, overflow: "hidden", height: "100%", display: "flex", flexDirection: "column" }}>
-                    {/* Image */}
-                    <div
-                      style={{
-                        height: "200px",
-                        background: `linear-gradient(135deg, rgba(13,61,102,0.34) 0%, rgba(${
-                          post.categorySlug === "design" ? "46,196,182" : post.categorySlug === "developpement" ? "13,61,102" : "46,196,182"
-                        },0.1) 100%)`,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        position: "relative",
-                      }}
-                    >
-                      <span style={{ fontSize: "3rem", opacity: 0.3 }}>📝</span>
-                      <span
-                        className="nv-badge"
-                        style={{ position: "absolute", top: "1rem", left: "1rem" }}
-                      >
-                        {post.category}
-                      </span>
-                    </div>
-                    {/* Content */}
-                    <div style={{ padding: "1.5rem", flex: 1, display: "flex", flexDirection: "column" }}>
-                      <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "0.75rem", fontSize: "0.8rem", color: "var(--nv-text-muted)" }}>
-                        <span>{new Date(post.date).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}</span>
-                        <span>·</span>
-                        <span>{post.readTime} min de lecture</span>
-                      </div>
-                      <h3 style={{ fontFamily: "Outfit, sans-serif", fontSize: "1.1rem", fontWeight: 700, marginBottom: "0.5rem", color: "var(--nv-text-primary)", lineHeight: 1.4 }}>
-                        {post.title}
-                      </h3>
-                      <p style={{ fontSize: "0.85rem", color: "var(--nv-text-secondary)", lineHeight: 1.7, margin: 0, flex: 1 }}>
-                        {post.excerpt}
-                      </p>
-                      <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginTop: "1rem", paddingTop: "1rem", borderTop: "1px solid var(--nv-border-light)" }}>
-                        <div
-                          style={{
-                            width: "28px",
-                            height: "28px",
-                            borderRadius: "50%",
-                            background: "var(--nv-grad-primary)",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            fontSize: "0.6rem",
-                            fontWeight: 700,
-                            color: "#fff",
-                          }}
-                        >
-                          {post.authorAvatar}
-                        </div>
-                        <span style={{ fontSize: "0.8rem", color: "var(--nv-text-secondary)" }}>{post.author}</span>
-                      </div>
-                    </div>
-                  </article>
+            {!search && (
+              <div className={styles.filters} aria-label="Filtrer les articles">
+                {blogCategories.map((item) => (
+                  <button
+                    key={item}
+                    type="button"
+                    onClick={() => setCategory(item)}
+                    className={category === item ? styles.filterActive : undefined}
+                  >
+                    {item}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className={styles.articleGrid}>
+            {filtered.map((post, index) => (
+              <ScrollReveal key={post.id} delay={index * 60}>
+                <Link href={`/blog/${post.slug}`} className={styles.articleCard}>
+                  <div className={styles.articleImageWrap}>
+                    <Image
+                      src={post.image}
+                      alt={`Illustration de l'article : ${post.title}`}
+                      fill
+                      sizes="(max-width: 700px) 100vw, (max-width: 1050px) 50vw, 33vw"
+                      className={styles.blogImage}
+                    />
+                  </div>
+                  <div className={styles.articleMeta}>
+                    <span>{post.category}</span>
+                    <small>{post.readTime} min de lecture</small>
+                  </div>
+                  <h2>{post.title}</h2>
+                  <p>{post.excerpt}</p>
+                  <div className={styles.articleFooter}>
+                    <span>{post.authorAvatar}</span>
+                    <small>{post.author}</small>
+                    <time dateTime={post.date}>
+                      {new Date(post.date).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" })}
+                    </time>
+                  </div>
                 </Link>
               </ScrollReveal>
             ))}
           </div>
 
           {filtered.length === 0 && (
-            <p style={{ textAlign: "center", color: "var(--nv-text-muted)", padding: "3rem 0" }}>
-              Aucun article trouvé.
-            </p>
+            <p className={styles.emptyState}>Aucun article ne correspond à votre recherche.</p>
           )}
         </div>
       </section>
-    </>
+    </main>
   );
 }
